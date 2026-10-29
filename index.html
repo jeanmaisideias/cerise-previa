@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#252a86">
+<title>Cerise — Comprar junto vale mais</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+:root{
+  --blue:#252a86;
+  --blue-2:#31419a;
+  --paper:#ffffff;
+  --mist:#f5f6fa;
+  --line:#dde0ed;
+  --ink:#2c3c57;
+  --muted:#69778f;
+  --soft:#eef2f8;
+  --accent:#23c85d;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'DM Sans',Arial,sans-serif}
+a{text-decoration:none;color:inherit}img{display:block;width:100%;height:100%;object-fit:cover}
+button,input{font:inherit}button{cursor:pointer}
+.wrap{width:min(1240px,calc(100% - 64px));margin:auto}
+.notice{background:var(--blue);color:#fff;text-align:center;padding:10px 16px;font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+.nav{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
+.navin{height:86px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.logo{font:800 42px/1 'Manrope',sans-serif;letter-spacing:-.08em;color:var(--blue)}
+.logo b{font-weight:800}
+.navlinks{display:flex;gap:28px;align-items:center;font-size:13px;font-weight:700;color:#334667}
+.navlinks a:hover{color:var(--blue)}
+.navright{display:flex;gap:12px;align-items:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;padding:16px 24px;border-radius:0;border:1px solid var(--blue);background:var(--blue);color:#fff;font-size:12px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;transition:.2s}
+.btn:hover{background:#1b206d}
+.btn.alt{background:transparent;color:#fff;border-color:#fff}
+.outline{display:inline-flex;align-items:center;justify-content:center;padding:14px 20px;border:1px solid var(--line);background:#fff;color:#2e3a57;font-size:12px;font-weight:700}
+.tag{display:inline-block;text-transform:uppercase;letter-spacing:.16em;font-size:11px;font-weight:800;color:#667291}
+.hero{display:grid;grid-template-columns:56% 44%;min-height:640px;background:#eff2f7}
+.heropic{min-height:640px;background:#d8deea}
+.herotext{position:relative;padding:70px max(28px,calc((100vw - 1240px)/2)) 70px 44px;display:flex;align-items:center}
+.panel{background:#fff;padding:44px 46px;max-width:530px;box-shadow:0 18px 50px rgba(24,37,78,.08)}
+.panel h1{font:600 clamp(40px,4.7vw,72px)/1.05 'Manrope',sans-serif;letter-spacing:-.08em;margin:18px 0;color:var(--blue)}
+.panel p{font-size:16px;line-height:1.8;color:var(--muted);margin:0 0 24px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.hero-note{margin-top:18px;font-size:12px;color:#6a7894}
+.quick{background:#fff;border-bottom:1px solid var(--line)}
+.quickin{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+.quickcard{display:flex;align-items:center;gap:16px;padding:30px 14px;border-right:1px solid var(--line)}
+.quickcard:last-child{border-right:0}
+.quickn{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:#eef2f8;color:var(--blue);font-weight:800}
+.quick strong{display:block;font-size:14px;margin-bottom:4px}
+.quick small{color:var(--muted);font-size:12px}
+.story{display:grid;grid-template-columns:1fr 1fr;gap:8%;align-items:center;padding:110px 0}
+.storypic{height:540px;background:#e6ebf4;position:relative}
+.storypic:after{content:'COMPRAS COLETIVAS';position:absolute;left:30px;bottom:30px;background:#fff;padding:16px 20px;font-size:11px;font-weight:800;letter-spacing:.16em;color:var(--blue)}
+.story h2,.sectionhead h2,.how h2,.newsletter h2{font:600 clamp(34px,3.5vw,54px)/1.12 'Manrope',sans-serif;letter-spacing:-.07em;margin:18px 0 18px;color:var(--blue)}
+.story p{font-size:16px;line-height:1.9;color:var(--muted)}
+.steps{display:grid;gap:18px;margin-top:28px}
+.steps>div{display:flex;gap:16px;align-items:flex-start}
+.steps b{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#edf1f7;color:var(--blue);font-size:13px;flex:none}
+.steps strong{font-size:14px}
+.steps small{display:block;font-size:13px;color:var(--muted);line-height:1.7;margin-top:5px}
+.catalog{background:#f7f8fc;padding:95px 0 100px}
+.sectionhead{display:flex;justify-content:space-between;align-items:end;gap:22px;margin-bottom:34px}
+.sectionhead p{max-width:430px;font-size:14px;line-height:1.8;color:var(--muted)}
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:26px}
+.filter{padding:12px 18px;border:1px solid var(--line);background:#fff;color:#4a5876;font-size:12px;font-weight:700}
+.filter.active{background:var(--blue);border-color:var(--blue);color:#fff}
+.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
+.product{background:#fff;display:flex;flex-direction:column;cursor:pointer}
+.photo{height:260px;overflow:hidden;position:relative;background:#e9edf5}
+.photo img{transition:transform .35s}
+.product:hover .photo img{transform:scale(1.04)}
+.pill{position:absolute;left:14px;top:14px;padding:8px 12px;background:#fff;color:var(--blue);font-size:10px;font-weight:800;letter-spacing:.08em}
+.info{padding:19px;display:flex;flex-direction:column;flex:1}
+.category{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#7984a0;font-weight:800}
+.info h3{font-size:17px;letter-spacing:-.03em;margin:10px 0 12px;color:#2f3f60}
+.prices{display:flex;justify-content:space-between;align-items:center;gap:10px}.prices b{font-size:22px;letter-spacing:-.05em;color:var(--blue)}.prices del{font-size:12px;color:#8893ab}
+.progress{height:5px;background:#e9eef5;margin:20px 0 10px}.progress span{display:block;height:100%;background:var(--blue-2)}
+.meta{display:flex;justify-content:space-between;font-size:11px;color:#6c7992}
+.details{border-top:1px solid #edf0f6;padding-top:14px;margin-top:16px;color:var(--blue);font-size:12px;font-weight:800}
+.editorial{display:grid;grid-template-columns:1fr 1fr;gap:26px;padding:100px 0}
+.editcard{height:360px;position:relative;overflow:hidden;background:#d9dfeb}.editcard img{filter:brightness(.78)}
+.overlay{position:absolute;left:35px;bottom:34px;color:#fff}.overlay small{font-size:11px;letter-spacing:.16em;text-transform:uppercase}.overlay h3{font:600 35px/1.12 'Manrope',sans-serif;letter-spacing:-.06em;max-width:320px;margin:12px 0}.overlay a{font-size:12px;text-decoration:underline}
+.how{background:#fff;padding:95px 0}.how .intro{text-align:center;max-width:760px;margin:0 auto 44px}.howgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.howitem{background:#f6f8fc;padding:34px}.howitem span{font-size:11px;letter-spacing:.15em;color:#6a7591;font-weight:800}.howitem h3{font-size:19px;margin:24px 0 10px;color:#2f3f60}.howitem p{font-size:13px;line-height:1.8;color:var(--muted)}
+.benefits{padding:0 0 100px}.benefitbox{border:1px solid #cad2e6;border-radius:4px;background:#fff;display:grid;grid-template-columns:repeat(4,1fr);overflow:hidden}.benefit{padding:28px 18px;text-align:center;border-right:1px solid #cad2e6}.benefit:last-child{border-right:0}.iconcircle{width:56px;height:56px;border-radius:50%;margin:0 auto 14px;background:#eef2f8;display:grid;place-items:center;color:var(--blue)}.iconcircle svg{width:26px;height:26px}.benefit h4{font-size:14px;color:var(--blue);margin:0 0 8px}.benefit p{font-size:12px;color:var(--muted);margin:0}
+.newsletter{background:#dfe5ee;padding:0}.newslay{display:grid;grid-template-columns:38% 62%;align-items:stretch}.newsimage{min-height:330px;background:#e8edf4}.newstext{padding:54px 48px;display:flex;align-items:center}.newstextin{max-width:520px}.newsletter h2{font-size:48px;margin-bottom:14px}.newsletter em{font-size:14px;color:#7c8495}.subform{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;margin:22px 0 18px}.subform input{height:44px;border:1px solid #d1d8e6;background:#fff;padding:0 14px;color:#44506b}.subform button{height:44px;padding:0 22px;border:0;background:var(--accent);color:#fff;font-size:12px;font-weight:800}.checks{display:flex;gap:20px;flex-wrap:wrap;border-top:1px solid #cbd3e2;padding-top:14px}.checks span{font-size:12px;color:#62708b}.checks span:before{content:'✔';color:var(--accent);margin-right:8px}
+.footer{background:var(--blue);color:#fff;padding:60px 0 20px}.footgrid{display:grid;grid-template-columns:1.2fr .8fr .8fr 1.2fr 1.2fr;gap:24px;align-items:start}.footbrand p{font-size:13px;line-height:1.8;color:#ced5ff;max-width:280px;margin:16px 0 20px}.social{display:flex;gap:10px}.social a{width:28px;height:28px;border-radius:50%;background:#fff;color:var(--blue);display:grid;place-items:center;font-size:13px;font-weight:800}.footcol h5{font-size:11px;letter-spacing:.16em;text-transform:uppercase;margin:6px 0 16px;color:#d6dcff}.footcol a{display:block;font-size:14px;font-weight:700;margin:11px 0;color:#fff}.featured-item{display:grid;grid-template-columns:48px 1fr;gap:10px;align-items:center;margin-bottom:12px}.featured-item img{width:48px;height:48px}.featured-item strong{display:block;font-size:13px;line-height:1.35}.featured-item span{font-size:11px;color:#c9d2ff}.footform input{width:100%;height:38px;border:0;background:#eef2f8;color:#4b5875;margin-bottom:8px;padding:0 12px}.footform button{width:100%;height:38px;border:0;background:var(--accent);color:#fff;font-weight:800}.footchecks{margin-top:12px}.footchecks span{display:block;font-size:11px;color:#d3dbff;margin-top:10px}.footchecks span:before{content:'✔';color:var(--accent);margin-right:8px}.footbottom{border-top:1px solid rgba(255,255,255,.18);margin-top:28px;padding-top:18px;font-size:11px;color:#d5dbff;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.modal{position:fixed;inset:0;background:rgba(10,18,43,.68);z-index:100;display:none;align-items:center;justify-content:center;padding:20px}.modal.open{display:flex}.modalbox{background:#fff;width:min(960px,100%);max-height:92vh;overflow:auto;position:relative}.close{position:absolute;right:12px;top:12px;width:36px;height:36px;border:0;background:#fff;font-size:24px;z-index:2}.modalinner{display:grid;grid-template-columns:48% 52%}.modalimg{min-height:640px;background:#e7edf5}.modalcontent{padding:34px}.modalcontent h2{font:600 40px/1.1 'Manrope',sans-serif;letter-spacing:-.06em;color:var(--blue);margin:16px 0}.moddesc{font-size:14px;line-height:1.8;color:var(--muted)}
+.tier{display:flex;justify-content:space-between;align-items:center;background:#f7f9fd;padding:16px 18px;margin:11px 0}.tier.current{border:1px solid #bfc9e8;background:#eef2fb}.tier span{font-size:13px}.tier small{color:#7b88a3}.tier strong{font-size:24px;letter-spacing:-.05em;color:var(--blue)}
+.quantity{display:flex;align-items:center;gap:10px;margin:22px 0}.quantity button{width:38px;height:38px;border:1px solid #d8e0ef;background:#fff}.quantity span{width:40px;text-align:center;font-weight:800}.form{display:grid;gap:10px}.form input{height:50px;border:1px solid #d6ddeb;padding:0 14px}.form small{font-size:12px;color:#7c889d}.success{display:none;margin-top:10px;padding:12px;background:#edf8ef;color:#236641;font-size:13px}
+@media (max-width:1050px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.footgrid{grid-template-columns:1fr 1fr}.newslay,.hero,.story,.editorial,.modalinner{grid-template-columns:1fr}.newsimage{order:-1}.panel{margin:30px 0}.benefitbox{grid-template-columns:repeat(2,1fr)}.howgrid{grid-template-columns:1fr}.story{gap:34px}}
+@media (max-width:760px){.wrap{width:min(100% - 28px,1240px)}.navlinks{display:none}.navin{height:74px}.logo{font-size:34px}.hero{min-height:auto}.heropic{min-height:360px}.herotext{padding:0 14px 36px}.panel{padding:28px}.sectionhead{display:block}.quickin{grid-template-columns:1fr}.quickcard{border-right:0;border-bottom:1px solid var(--line)}.quickcard:last-child{border-bottom:0}.storypic{height:360px}.cards{grid-template-columns:1fr}.benefitbox{grid-template-columns:1fr}.subform{grid-template-columns:1fr}.newsletter h2{font-size:36px}.newstext{padding:34px 24px}.footgrid{grid-template-columns:1fr}.modalcontent h2{font-size:31px}.modalimg{min-height:320px}.footbottom{display:block}}
+</style>
+</head>
+<body>
+<div class="notice">Demonstração visual da experiência Cerise</div>
+<header class="nav">
+  <div class="wrap navin">
+    <a class="logo" href="#top">cerise<b>.</b></a>
+    <nav class="navlinks">
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#rodadas">Produtos</a>
+      <a href="#passos">Jornal</a>
+      <a href="#newsletter">Newsletter</a>
+    </nav>
+    <div class="navright"><a class="outline" href="#rodadas">Explorar</a><a class="btn" href="#newsletter">Receber ofertas</a></div>
+  </div>
+</header>
+<main id="top">
+  <section class="hero">
+    <div class="heropic"><img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1400&q=85&fit=crop" alt="Foto placeholder editorial de consumidores e produtos"></div>
+    <div class="herotext"><div class="panel"><span class="tag">COMPRAS COLETIVAS OFICIAIS</span><h1>Comprar junto pode render um preço melhor.</h1><p>A Cerise reúne pessoas em torno de produtos selecionados. Você acompanha a rodada, reserva sua quantidade e vê o valor evoluir conforme o grupo cresce.</p><div class="hero-actions"><a class="btn" href="#rodadas">Ver rodadas em destaque</a><a class="outline" href="#como-funciona">Entender a mecânica</a></div><div class="hero-note">Rodadas ilustrativas • Sem reserva ou pagamento real nesta demonstração</div></div></div>
+  </section>
+
+  <div class="quick"><div class="wrap quickin">
+    <div class="quickcard"><span class="quickn">01</span><div><strong>Escolha uma rodada</strong><small>Veja os produtos e as faixas de preço</small></div></div>
+    <div class="quickcard"><span class="quickn">02</span><div><strong>Reserve sua quantidade</strong><small>Participe do grupo de forma simples</small></div></div>
+    <div class="quickcard"><span class="quickn">03</span><div><strong>Acompanhe o desconto</strong><small>O valor pode melhorar com mais adesões</small></div></div>
+  </div></div>
+
+  <section class="wrap story" id="como-funciona">
+    <div class="storypic"><img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1200&q=85&fit=crop" alt="Pessoas comprando juntas, imagem ilustrativa"></div>
+    <div>
+      <span class="tag">O QUE É A CERISE</span>
+      <h2>Uma plataforma pensada para quem quer unir interesse e economizar.</h2>
+      <p>A Cerise apresenta rodadas de compras coletivas com tempo limitado. Cada produto mostra suas faixas de preço, a quantidade já reservada e o próximo objetivo do grupo. Quanto mais pessoas participam, maior pode ser a vantagem para todos.</p>
+      <div class="steps">
+        <div><b>1</b><div><strong>A Cerise abre uma rodada</strong><small>Você vê produto, tempo restante e regras da oferta coletiva.</small></div></div>
+        <div><b>2</b><div><strong>O grupo ganha força</strong><small>Cada reserva ajuda a avançar rumo às próximas faixas de preço.</small></div></div>
+        <div><b>3</b><div><strong>O preço final é consolidado</strong><small>No encerramento, a rodada define o valor alcançado pelo grupo.</small></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="catalog" id="rodadas">
+    <div class="wrap">
+      <div class="sectionhead">
+        <div><span class="tag">RODADAS EM DESTAQUE</span><h2>Descubra produtos para comprar em grupo.</h2></div>
+        <p>Explore moda, eletrônicos, ferramentas e itens para casa em uma vitrine pensada para tornar a dinâmica das compras coletivas fácil de entender logo no primeiro olhar.</p>
+      </div>
+      <div class="filters" id="filters">
+        <button class="filter active" data-filter="Todos">Todos os produtos</button>
+        <button class="filter" data-filter="Eletrônicos">Eletrônicos</button>
+        <button class="filter" data-filter="Moda">Moda</button>
+        <button class="filter" data-filter="Ferramentas">Ferramentas</button>
+        <button class="filter" data-filter="Casa">Casa</button>
+      </div>
+      <div class="cards" id="cards"></div>
+    </div>
+  </section>
+
+  <section class="wrap editorial">
+    <div class="editcard"><img src="https://images.unsplash.com/photo-1498049794561-7780e7231661?w=1200&q=85&fit=crop" alt="Categoria eletrônicos"><div class="overlay"><small>ELETRÔNICOS</small><h3>Tecnologia também pode entrar em uma compra coletiva.</h3><a href="#rodadas">Explorar produtos ↗</a></div></div>
+    <div class="editcard"><img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=1200&q=85&fit=crop" alt="Categoria moda"><div class="overlay"><small>MODA</small><h3>Seu estilo com a força do grupo.</h3><a href="#rodadas">Explorar produtos ↗</a></div></div>
+  </section>
+
+  <section class="how" id="passos">
+    <div class="wrap">
+      <div class="intro"><span class="tag">COMO PARTICIPAR</span><h2>Uma experiência simples para entender e acompanhar.</h2></div>
+      <div class="howgrid">
+        <div class="howitem"><span>PASSO 01</span><h3>Entre em uma rodada</h3><p>Abra o produto, veja o tempo restante e entenda como as faixas de desconto funcionam.</p></div>
+        <div class="howitem"><span>PASSO 02</span><h3>Reserve suas unidades</h3><p>Informe seu nome, contato e quantidade desejada para manifestar participação.</p></div>
+        <div class="howitem"><span>PASSO 03</span><h3>Acompanhe o resultado</h3><p>Veja o avanço da rodada, a meta para a próxima faixa e o preço consolidado no fechamento.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="benefits">
+    <div class="wrap">
+      <div class="benefitbox">
+        <div class="benefit"><div class="iconcircle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M7 7h10v10H7z"/><path d="M4 10h3M17 10h3M10 4v3M10 17v3"/></svg></div><h4>Great Prices</h4><p>Faixas coletivas pensadas para valorizar a compra em grupo.</p></div>
+        <div class="benefit"><div class="iconcircle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M8 7H4v4"/><path d="M4 11a8 8 0 0 0 14 4"/><path d="M16 17h4v-4"/><path d="M20 13A8 8 0 0 0 6 9"/></svg></div><h4>Free Returns</h4><p>Layout demonstrativo inspirado em experiências modernas de e-commerce.</p></div>
+        <div class="benefit"><div class="iconcircle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3l7 4v5c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V7l7-4z"/><path d="M9.5 12l1.7 1.7L15 10"/></svg></div><h4>Safe Shopping</h4><p>Clareza visual para explicar produto, prazo, unidades e preço atual.</p></div>
+        <div class="benefit"><div class="iconcircle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M7 7h10l1 12H6L7 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg></div><h4>Best Store</h4><p>Percepção de loja organizada, com vitrines amplas e navegação intuitiva.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="newsletter" id="newsletter">
+    <div class="wrap newslay">
+      <div class="newsimage"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=900&q=85&fit=crop" alt="Pessoa ilustrativa para seção newsletter"></div>
+      <div class="newstext"><div class="newstextin"><h2>Sign Up for special <br>News & Offers</h2><em>Hand picked special for you...</em><div class="subform"><input placeholder="your name" aria-label="your name"><input placeholder="your email" aria-label="your email"><button>Subscribe!</button></div><div class="checks"><span>Exclusive Product Releases</span><span>Only Subscribers Offers</span></div></div></div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footgrid">
+      <div class="footbrand">
+        <div class="logo" style="color:#fff;font-size:46px">cerise<b>.</b></div>
+        <p>Compras coletivas com uma apresentação clara, editorial e inspirada em experiências visuais sofisticadas de e-commerce.</p>
+        <div class="social"><a href="#">f</a><a href="#">◎</a><a href="#">𝕏</a></div>
+      </div>
+      <div class="footcol">
+        <h5>Menu</h5>
+        <a href="#como-funciona">About Us</a>
+        <a href="#rodadas">Products</a>
+        <a href="#passos">Journal</a>
+        <a href="#newsletter">Contact Us</a>
+      </div>
+      <div class="footcol">
+        <h5>Store</h5>
+        <a href="#rodadas">Moda</a>
+        <a href="#rodadas">Eletrônicos</a>
+        <a href="#rodadas">Ferramentas</a>
+        <a href="#rodadas">Casa</a>
+      </div>
+      <div class="footcol">
+        <h5>Featured</h5>
+        <div class="featured-item"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=100&q=80&fit=crop" alt="Fone Bluetooth"><div><strong>Fone Bluetooth</strong><span>R$ 199,00</span></div></div>
+        <div class="featured-item"><img src="https://images.unsplash.com/photo-1517256673644-36ad11246d21?w=100&q=80&fit=crop" alt="Cafeteira"><div><strong>Cafeteira</strong><span>R$ 329,00</span></div></div>
+        <div class="featured-item"><img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?w=100&q=80&fit=crop" alt="Parafusadeira"><div><strong>Parafusadeira</strong><span>R$ 349,00</span></div></div>
+      </div>
+      <div class="footcol">
+        <h5>Newsletter</h5>
+        <form class="footform"><input placeholder="name" aria-label="name"><input placeholder="email" aria-label="email"><button type="button">Submit</button></form>
+        <div class="footchecks"><span>Exclusive Product Releases</span><span>Only Subscribers Offers</span></div>
+      </div>
+    </div>
+    <div class="footbottom"><span>CERISE • Vitrine pública ilustrativa</span><span>Esta página demonstra a experiência visual do usuário final. Nenhum pedido real é processado.</span></div>
+  </div>
+</footer>
+
+<div id="modal" class="modal" role="dialog" aria-modal="true" aria-label="Detalhes da rodada">
+  <div class="modalbox"><button class="close" id="close" aria-label="Fechar">×</button><div id="modalbody"></div></div>
+</div>
+
+<script>
+const products=[
+['Fone Bluetooth sem fio','Eletrônicos',299,199,26,40,'photo-1505740420928-5e560c06d30e'],
+['Relógio casual minimalista','Moda',389,269,19,30,'photo-1523275335684-37898b6baf30'],
+['Parafusadeira portátil','Ferramentas',499,349,16,25,'photo-1504148455328-c376907d081c'],
+['Cafeteira para sua cozinha','Casa',459,329,21,35,'photo-1517256673644-36ad11246d21'],
+['Tênis casual unissex','Moda',349,239,17,30,'photo-1542291026-7eec264c27ff'],
+['Headphone premium','Eletrônicos',599,419,31,50,'photo-1546435770-a3e426bf472b'],
+['Kit de ferramentas','Ferramentas',329,229,12,20,'photo-1581147036324-c1cdb4a25a9d'],
+['Mochila urbana','Moda',289,199,23,40,'photo-1553062407-98eeb64c6a62'],
+['Smartwatch esportivo','Eletrônicos',649,449,18,30,'photo-1523275335684-37898b6baf30'],
+['Luminária de mesa','Casa',239,169,14,25,'photo-1507473885765-e6ed057f782c'],
+['Furadeira elétrica','Ferramentas',579,399,22,35,'photo-1504148455328-c376907d081c'],
+['Câmera instantânea','Eletrônicos',769,549,24,40,'photo-1526170375885-4d8ecf77b99f']
+];
+const money=n=>n.toLocaleString('pt-BR',{style:'currency',currency:'BRL',minimumFractionDigits:2,maximumFractionDigits:2});
+const img=id=>`https://images.unsplash.com/${id}?w=640&q=80&fit=crop`;
+const esc=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function render(category='Todos'){
+  const items=products.map((p,i)=>({p,i})).filter(x=>category==='Todos'||x.p[1]===category);
+  document.getElementById('cards').innerHTML=items.map(({p,i})=>`<article class="product" tabindex="0" role="button" aria-label="Ver rodada ${esc(p[0])}" data-id="${i}"><div class="photo"><img loading="lazy" src="${img(p[6])}" alt="Imagem ilustrativa de ${esc(p[0])}"><span class="pill">PREÇO COLETIVO</span></div><div class="info"><span class="category">${p[1]}</span><h3>${p[0]}</h3><div class="prices"><b>${money(p[3])}</b><del>${money(p[2])}</del></div><div class="progress"><span style="width:${Math.min(100,100*p[4]/p[5])}%"></span></div><div class="meta"><span>${p[4]} unidades reservadas</span><span>Meta ${p[5]}</span></div><div class="details">CONHECER RODADA ↗</div></div></article>`).join('');
+  document.querySelectorAll('.product').forEach(el=>{el.onclick=()=>openProduct(+el.dataset.id);el.onkeydown=e=>{if(e.key==='Enter')openProduct(+el.dataset.id)}})
+}
+render();
+document.querySelectorAll('.filter').forEach(el=>el.addEventListener('click',()=>{document.querySelectorAll('.filter').forEach(x=>x.classList.remove('active'));el.classList.add('active');render(el.dataset.filter)}));
+let qty=1;
+function openProduct(i){
+  const p=products[i]; qty=1; const tier2=Math.round((p[2]+p[3])/2);
+  document.getElementById('modalbody').innerHTML=`<div class="modalinner"><div class="modalimg"><img src="${img(p[6])}" alt="Produto ilustrativo"></div><div class="modalcontent"><span class="tag">PREÇO COLETIVO</span><h2>${p[0]}</h2><p class="moddesc">Acompanhe a evolução dos descontos conforme novas unidades são reservadas. Valores e prazos ilustrativos.</p><div style="display:flex;justify-content:space-between;font-size:12px;margin:18px 0;gap:12px;flex-wrap:wrap"><span>● Rodada em andamento</span><b>⏱ 47h 23min restantes*</b></div><div class="tier"><span>Faixa inicial<br><small>1 a 9 unidades</small></span><strong>${money(p[2])}</strong></div><div class="tier current"><span>Faixa atual<br><small>10 a ${p[5]-1} unidades</small></span><strong>${money(tier2)}</strong></div><div class="tier"><span>Próxima faixa<br><small>A partir de ${p[5]} unidades</small></span><strong>${money(p[3])}</strong></div><p class="moddesc">${p[4]} unidades reservadas • Faltam ${Math.max(0,p[5]-p[4])} para a próxima faixa.<br>*Contador demonstrativo, não conectado a um servidor.</p><div class="quantity"><strong style="font-size:12px;margin-right:auto">Quantidade desejada</strong><button id="minus">−</button><span id="qty">1</span><button id="plus">+</button></div><form id="demoform" class="form"><input aria-label="Nome" placeholder="Seu nome" required><input aria-label="Contato" placeholder="WhatsApp ou e-mail" required><button class="btn" type="submit">Participar desta rodada ↗</button><small>Esta página é uma demonstração visual. Nenhum dado é enviado ou armazenado.</small></form><div id="success" class="success">Esta é uma simulação da experiência de participação. Nenhuma reserva foi registrada.</div><button class="outline" id="share" style="margin-top:12px;width:100%">Compartilhar esta rodada</button></div></div>`;
+  document.getElementById('modal').classList.add('open'); document.body.style.overflow='hidden';
+  document.getElementById('minus').onclick=()=>{qty=Math.max(1,qty-1);document.getElementById('qty').textContent=qty};
+  document.getElementById('plus').onclick=()=>{qty=Math.min(30,qty+1);document.getElementById('qty').textContent=qty};
+  document.getElementById('demoform').onsubmit=e=>{e.preventDefault();document.getElementById('success').style.display='block';e.target.reset()};
+  document.getElementById('share').onclick=async()=>{try{await navigator.clipboard.writeText(location.href.split('#')[0]+'#rodadas');alert('Link da demonstração copiado.')}catch(e){alert('Link desta página: '+location.href)}}
+}
+function closeModal(){document.getElementById('modal').classList.remove('open');document.body.style.overflow=''}
+document.getElementById('close').onclick=closeModal;
+document.getElementById('modal').onclick=e=>{if(e.target.id==='modal')closeModal()};
+document.onkeydown=e=>{if(e.key==='Escape')closeModal()};
+</script>
+</body></html>
