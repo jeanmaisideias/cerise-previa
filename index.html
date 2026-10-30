@@ -1,272 +1,1072 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#252a86">
-<title>Cerise — Comprar junto vale mais</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cerise — Compras coletivas: quanto mais gente, menor o preço</title>
+<meta name="theme-color" content="#C2183F">
+<script>document.documentElement.classList.add('js')</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
 :root{
-  --blue:#252a86;
-  --blue-2:#31419a;
-  --paper:#ffffff;
-  --mist:#f5f6fa;
-  --line:#dde0ed;
-  --ink:#2c3c57;
-  --muted:#69778f;
-  --soft:#eef2f8;
-  --accent:#23c85d;
+  --bg:#F7F3EF;
+  --bg-2:#EFE8E1;
+  --surface:#FFFFFF;
+  --ink:#17110F;
+  --ink-2:#3B322E;
+  --muted:#7A6F68;
+  --line:#E6DDD5;
+  --cerise:#C2183F;
+  --cerise-d:#A0102F;
+  --cerise-soft:#FBE8ED;
+  --green:#1E8A5A;
+  --green-soft:#E3F4EB;
+  --wa:#1FAF5A;
+  --dark:#1B1416;
+  --dark-2:#271D20;
+  --r-lg:28px;
+  --r-md:18px;
+  --r-sm:12px;
+  --shadow:0 24px 60px -28px rgba(40,18,22,.28);
+  --serif:'Fraunces',Georgia,serif;
+  --sans:'Manrope',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
 }
-*{box-sizing:border-box}
+*{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:'DM Sans',Arial,sans-serif}
-a{text-decoration:none;color:inherit}img{display:block;width:100%;height:100%;object-fit:cover}
-button,input{font:inherit}button{cursor:pointer}
-.wrap{width:min(1240px,calc(100% - 64px));margin:auto}
-.notice{background:var(--blue);color:#fff;text-align:center;padding:10px 16px;font-size:12px;letter-spacing:.06em;text-transform:uppercase}
-.nav{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
-.navin{height:86px;display:flex;align-items:center;justify-content:space-between;gap:24px}
-.logo{font:800 42px/1 'Manrope',sans-serif;letter-spacing:-.08em;color:var(--blue)}
-.logo b{font-weight:800}
-.navlinks{display:flex;gap:28px;align-items:center;font-size:13px;font-weight:700;color:#334667}
-.navlinks a:hover{color:var(--blue)}
-.navright{display:flex;gap:12px;align-items:center}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;padding:16px 24px;border-radius:0;border:1px solid var(--blue);background:var(--blue);color:#fff;font-size:12px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;transition:.2s}
-.btn:hover{background:#1b206d}
-.btn.alt{background:transparent;color:#fff;border-color:#fff}
-.outline{display:inline-flex;align-items:center;justify-content:center;padding:14px 20px;border:1px solid var(--line);background:#fff;color:#2e3a57;font-size:12px;font-weight:700}
-.tag{display:inline-block;text-transform:uppercase;letter-spacing:.16em;font-size:11px;font-weight:800;color:#667291}
-.hero{display:grid;grid-template-columns:56% 44%;min-height:640px;background:#eff2f7}
-.heropic{min-height:640px;background:#d8deea}
-.herotext{position:relative;padding:70px max(28px,calc((100vw - 1240px)/2)) 70px 44px;display:flex;align-items:center}
-.panel{background:#fff;padding:44px 46px;max-width:530px;box-shadow:0 18px 50px rgba(24,37,78,.08)}
-.panel h1{font:600 clamp(40px,4.7vw,72px)/1.05 'Manrope',sans-serif;letter-spacing:-.08em;margin:18px 0;color:var(--blue)}
-.panel p{font-size:16px;line-height:1.8;color:var(--muted);margin:0 0 24px}
-.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
-.hero-note{margin-top:18px;font-size:12px;color:#6a7894}
-.quick{background:#fff;border-bottom:1px solid var(--line)}
-.quickin{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
-.quickcard{display:flex;align-items:center;gap:16px;padding:30px 14px;border-right:1px solid var(--line)}
-.quickcard:last-child{border-right:0}
-.quickn{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:#eef2f8;color:var(--blue);font-weight:800}
-.quick strong{display:block;font-size:14px;margin-bottom:4px}
-.quick small{color:var(--muted);font-size:12px}
-.story{display:grid;grid-template-columns:1fr 1fr;gap:8%;align-items:center;padding:110px 0}
-.storypic{height:540px;background:#e6ebf4;position:relative}
-.storypic:after{content:'COMPRAS COLETIVAS';position:absolute;left:30px;bottom:30px;background:#fff;padding:16px 20px;font-size:11px;font-weight:800;letter-spacing:.16em;color:var(--blue)}
-.story h2,.sectionhead h2,.how h2,.newsletter h2{font:600 clamp(34px,3.5vw,54px)/1.12 'Manrope',sans-serif;letter-spacing:-.07em;margin:18px 0 18px;color:var(--blue)}
-.story p{font-size:16px;line-height:1.9;color:var(--muted)}
-.steps{display:grid;gap:18px;margin-top:28px}
-.steps>div{display:flex;gap:16px;align-items:flex-start}
-.steps b{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#edf1f7;color:var(--blue);font-size:13px;flex:none}
-.steps strong{font-size:14px}
-.steps small{display:block;font-size:13px;color:var(--muted);line-height:1.7;margin-top:5px}
-.catalog{background:#f7f8fc;padding:95px 0 100px}
-.sectionhead{display:flex;justify-content:space-between;align-items:end;gap:22px;margin-bottom:34px}
-.sectionhead p{max-width:430px;font-size:14px;line-height:1.8;color:var(--muted)}
-.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:26px}
-.filter{padding:12px 18px;border:1px solid var(--line);background:#fff;color:#4a5876;font-size:12px;font-weight:700}
-.filter.active{background:var(--blue);border-color:var(--blue);color:#fff}
-.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
-.product{background:#fff;display:flex;flex-direction:column;cursor:pointer}
-.photo{height:260px;overflow:hidden;position:relative;background:#e9edf5}
-.photo img{transition:transform .35s}
-.product:hover .photo img{transform:scale(1.04)}
-.pill{position:absolute;left:14px;top:14px;padding:8px 12px;background:#fff;color:var(--blue);font-size:10px;font-weight:800;letter-spacing:.08em}
-.info{padding:19px;display:flex;flex-direction:column;flex:1}
-.category{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#7984a0;font-weight:800}
-.info h3{font-size:17px;letter-spacing:-.03em;margin:10px 0 12px;color:#2f3f60}
-.prices{display:flex;justify-content:space-between;align-items:center;gap:10px}.prices b{font-size:22px;letter-spacing:-.05em;color:var(--blue)}.prices del{font-size:12px;color:#8893ab}
-.progress{height:5px;background:#e9eef5;margin:20px 0 10px}.progress span{display:block;height:100%;background:var(--blue-2)}
-.meta{display:flex;justify-content:space-between;font-size:11px;color:#6c7992}
-.details{border-top:1px solid #edf0f6;padding-top:14px;margin-top:16px;color:var(--blue);font-size:12px;font-weight:800}
-.editorial{display:grid;grid-template-columns:1fr 1fr;gap:26px;padding:100px 0}
-.editcard{height:360px;position:relative;overflow:hidden;background:#d9dfeb}.editcard img{filter:brightness(.78)}
-.overlay{position:absolute;left:35px;bottom:34px;color:#fff}.overlay small{font-size:11px;letter-spacing:.16em;text-transform:uppercase}.overlay h3{font:600 35px/1.12 'Manrope',sans-serif;letter-spacing:-.06em;max-width:320px;margin:12px 0}.overlay a{font-size:12px;text-decoration:underline}
-.how{background:#fff;padding:95px 0}.how .intro{text-align:center;max-width:760px;margin:0 auto 44px}.howgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.howitem{background:#f6f8fc;padding:34px}.howitem span{font-size:11px;letter-spacing:.15em;color:#6a7591;font-weight:800}.howitem h3{font-size:19px;margin:24px 0 10px;color:#2f3f60}.howitem p{font-size:13px;line-height:1.8;color:var(--muted)}
-.benefits{padding:0 0 100px}.benefitbox{border:1px solid #cad2e6;border-radius:4px;background:#fff;display:grid;grid-template-columns:repeat(4,1fr);overflow:hidden}.benefit{padding:28px 18px;text-align:center;border-right:1px solid #cad2e6}.benefit:last-child{border-right:0}.iconcircle{width:56px;height:56px;border-radius:50%;margin:0 auto 14px;background:#eef2f8;display:grid;place-items:center;color:var(--blue)}.iconcircle svg{width:26px;height:26px}.benefit h4{font-size:14px;color:var(--blue);margin:0 0 8px}.benefit p{font-size:12px;color:var(--muted);margin:0}
-.newsletter{background:#dfe5ee;padding:0}.newslay{display:grid;grid-template-columns:38% 62%;align-items:stretch}.newsimage{min-height:330px;background:#e8edf4}.newstext{padding:54px 48px;display:flex;align-items:center}.newstextin{max-width:520px}.newsletter h2{font-size:48px;margin-bottom:14px}.newsletter em{font-size:14px;color:#7c8495}.subform{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;margin:22px 0 18px}.subform input{height:44px;border:1px solid #d1d8e6;background:#fff;padding:0 14px;color:#44506b}.subform button{height:44px;padding:0 22px;border:0;background:var(--accent);color:#fff;font-size:12px;font-weight:800}.checks{display:flex;gap:20px;flex-wrap:wrap;border-top:1px solid #cbd3e2;padding-top:14px}.checks span{font-size:12px;color:#62708b}.checks span:before{content:'✔';color:var(--accent);margin-right:8px}
-.footer{background:var(--blue);color:#fff;padding:60px 0 20px}.footgrid{display:grid;grid-template-columns:1.2fr .8fr .8fr 1.2fr 1.2fr;gap:24px;align-items:start}.footbrand p{font-size:13px;line-height:1.8;color:#ced5ff;max-width:280px;margin:16px 0 20px}.social{display:flex;gap:10px}.social a{width:28px;height:28px;border-radius:50%;background:#fff;color:var(--blue);display:grid;place-items:center;font-size:13px;font-weight:800}.footcol h5{font-size:11px;letter-spacing:.16em;text-transform:uppercase;margin:6px 0 16px;color:#d6dcff}.footcol a{display:block;font-size:14px;font-weight:700;margin:11px 0;color:#fff}.featured-item{display:grid;grid-template-columns:48px 1fr;gap:10px;align-items:center;margin-bottom:12px}.featured-item img{width:48px;height:48px}.featured-item strong{display:block;font-size:13px;line-height:1.35}.featured-item span{font-size:11px;color:#c9d2ff}.footform input{width:100%;height:38px;border:0;background:#eef2f8;color:#4b5875;margin-bottom:8px;padding:0 12px}.footform button{width:100%;height:38px;border:0;background:var(--accent);color:#fff;font-weight:800}.footchecks{margin-top:12px}.footchecks span{display:block;font-size:11px;color:#d3dbff;margin-top:10px}.footchecks span:before{content:'✔';color:var(--accent);margin-right:8px}.footbottom{border-top:1px solid rgba(255,255,255,.18);margin-top:28px;padding-top:18px;font-size:11px;color:#d5dbff;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
-.modal{position:fixed;inset:0;background:rgba(10,18,43,.68);z-index:100;display:none;align-items:center;justify-content:center;padding:20px}.modal.open{display:flex}.modalbox{background:#fff;width:min(960px,100%);max-height:92vh;overflow:auto;position:relative}.close{position:absolute;right:12px;top:12px;width:36px;height:36px;border:0;background:#fff;font-size:24px;z-index:2}.modalinner{display:grid;grid-template-columns:48% 52%}.modalimg{min-height:640px;background:#e7edf5}.modalcontent{padding:34px}.modalcontent h2{font:600 40px/1.1 'Manrope',sans-serif;letter-spacing:-.06em;color:var(--blue);margin:16px 0}.moddesc{font-size:14px;line-height:1.8;color:var(--muted)}
-.tier{display:flex;justify-content:space-between;align-items:center;background:#f7f9fd;padding:16px 18px;margin:11px 0}.tier.current{border:1px solid #bfc9e8;background:#eef2fb}.tier span{font-size:13px}.tier small{color:#7b88a3}.tier strong{font-size:24px;letter-spacing:-.05em;color:var(--blue)}
-.quantity{display:flex;align-items:center;gap:10px;margin:22px 0}.quantity button{width:38px;height:38px;border:1px solid #d8e0ef;background:#fff}.quantity span{width:40px;text-align:center;font-weight:800}.form{display:grid;gap:10px}.form input{height:50px;border:1px solid #d6ddeb;padding:0 14px}.form small{font-size:12px;color:#7c889d}.success{display:none;margin-top:10px;padding:12px;background:#edf8ef;color:#236641;font-size:13px}
-@media (max-width:1050px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.footgrid{grid-template-columns:1fr 1fr}.newslay,.hero,.story,.editorial,.modalinner{grid-template-columns:1fr}.newsimage{order:-1}.panel{margin:30px 0}.benefitbox{grid-template-columns:repeat(2,1fr)}.howgrid{grid-template-columns:1fr}.story{gap:34px}}
-@media (max-width:760px){.wrap{width:min(100% - 28px,1240px)}.navlinks{display:none}.navin{height:74px}.logo{font-size:34px}.hero{min-height:auto}.heropic{min-height:360px}.herotext{padding:0 14px 36px}.panel{padding:28px}.sectionhead{display:block}.quickin{grid-template-columns:1fr}.quickcard{border-right:0;border-bottom:1px solid var(--line)}.quickcard:last-child{border-bottom:0}.storypic{height:360px}.cards{grid-template-columns:1fr}.benefitbox{grid-template-columns:1fr}.subform{grid-template-columns:1fr}.newsletter h2{font-size:36px}.newstext{padding:34px 24px}.footgrid{grid-template-columns:1fr}.modalcontent h2{font-size:31px}.modalimg{min-height:320px}.footbottom{display:block}}
+body{font-family:var(--sans);color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;line-height:1.5}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0}
+.wrap{width:min(1280px,calc(100% - 48px));margin:0 auto}
+.kicker{display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.kicker::before{content:'';width:22px;height:1.5px;background:currentColor}
+.h2{font-family:var(--serif);font-weight:500;font-size:clamp(34px,4.2vw,54px);line-height:1.04;letter-spacing:-.02em;margin-top:14px;text-wrap:balance}
+.h2 em{font-style:italic;color:var(--cerise)}
+.lead{font-size:17px;color:var(--muted);line-height:1.65;max-width:560px;margin-top:16px;text-wrap:pretty}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:52px;padding:0 26px;border-radius:999px;font-weight:700;font-size:15px;transition:transform .18s ease,background .18s ease,box-shadow .18s ease;white-space:nowrap}
+.btn svg{width:18px;height:18px;flex:none}
+.btn-primary{background:var(--cerise);color:#fff;box-shadow:0 12px 26px -12px rgba(194,24,63,.7)}
+.btn-primary:hover{background:var(--cerise-d);transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+.btn-ghost:hover{background:var(--ink);color:#fff}
+.btn-wa{background:var(--wa);color:#fff}
+.btn-wa:hover{background:#17964c}
+.btn-light{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.18)}
+.btn-light:hover{background:rgba(255,255,255,.16)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* ===== Announcement ===== */
+.announce{background:var(--ink);color:#F2E9E4;font-size:13px;overflow:hidden;white-space:nowrap}
+.announce-track{display:inline-flex;gap:48px;padding:10px 0;animation:marquee 38s linear infinite}
+.announce-track span{display:inline-flex;align-items:center;gap:10px}
+.announce-track i{width:6px;height:6px;border-radius:50%;background:var(--cerise);display:inline-block}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ===== Header ===== */
+header{position:sticky;top:0;z-index:50;background:rgba(247,243,239,.88);backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid transparent;transition:border-color .2s}
+header.scrolled{border-color:var(--line)}
+.nav{height:76px;display:flex;align-items:center;gap:28px}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-size:30px;font-weight:500;letter-spacing:-.03em;color:var(--ink)}
+.logo svg{width:30px;height:30px}
+.navlinks{display:flex;gap:30px;margin-left:24px;font-size:15px;font-weight:600;color:var(--ink-2)}
+.navlinks a{position:relative;padding:6px 0}
+.navlinks a::after{content:'';position:absolute;left:0;right:100%;bottom:0;height:1.5px;background:var(--cerise);transition:right .25s}
+.navlinks a:hover::after{right:0}
+.navright{margin-left:auto;display:flex;align-items:center;gap:8px}
+.iconbtn{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:var(--ink);transition:background .2s;position:relative}
+.iconbtn:hover{background:var(--bg-2)}
+.iconbtn svg{width:21px;height:21px}
+.iconbtn .count{position:absolute;top:6px;right:4px;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--cerise);color:#fff;font-size:11px;font-weight:800;display:grid;place-items:center}
+.nav .btn{height:44px;padding:0 20px;font-size:14px}
+.burger{display:none}
+.mobile-menu{display:none}
+
+/* ===== Hero ===== */
+.hero{padding:36px 0 56px}
+.hero-grid{display:grid;grid-template-columns:1fr 1.08fr;gap:56px;align-items:center}
+.hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(44px,5.6vw,82px);line-height:.98;letter-spacing:-.035em;margin-top:20px;text-wrap:balance}
+.hero h1 em{font-style:italic;color:var(--cerise)}
+.hero .lead{font-size:18px;max-width:520px}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-top:32px}
+.hero-trust{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px;padding-top:28px;border-top:1px solid var(--line);max-width:560px}
+.hero-trust div{display:flex;flex-direction:column;gap:4px}
+.hero-trust strong{font-family:var(--serif);font-size:28px;font-weight:500;letter-spacing:-.02em}
+.hero-trust span{font-size:13px;color:var(--muted);line-height:1.4}
+.bento{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:16px}
+.bento-photo{border-radius:var(--r-lg);overflow:hidden;background:var(--bg-2)}
+.bento-photo img{width:100%;height:100%;object-fit:cover}
+.bento-tall{grid-row:span 2;min-height:560px}
+.bento-tall img{animation:kenburns 18s ease-in-out infinite alternate}
+@keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.07)}}
+.bento-small{height:210px;position:relative}
+.live{background:var(--dark);color:#fff;border-radius:var(--r-lg);padding:22px;display:flex;flex-direction:column;gap:16px;box-shadow:var(--shadow)}
+.live-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.live-dot{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#FF8FA8}
+.live-dot i{width:8px;height:8px;border-radius:50%;background:#FF4D73;box-shadow:0 0 0 0 rgba(255,77,115,.7);animation:pulse 1.6s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 10px rgba(255,77,115,0)}100%{box-shadow:0 0 0 0 rgba(255,77,115,0)}}
+.live-clock{font-variant-numeric:tabular-nums;font-size:13px;font-weight:700;color:#D9CCC8;background:rgba(255,255,255,.08);padding:6px 10px;border-radius:999px}
+.live-prod{display:flex;gap:12px;align-items:center}
+.live-prod img{width:52px;height:52px;border-radius:12px;object-fit:cover;flex:none}
+.live-prod strong{display:block;font-size:15px}
+.live-prod span{font-size:12px;color:#B9ABA7}
+.live-price{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.live-price b{font-family:var(--serif);font-size:44px;font-weight:500;letter-spacing:-.03em;font-variant-numeric:tabular-nums;transition:color .3s}
+.live-price b.drop{color:#7BE3A9}
+.live-price s{color:#9A8B87;font-size:15px}
+.live-bar{position:relative;height:8px;border-radius:999px;background:rgba(255,255,255,.12)}
+.live-bar span{position:absolute;inset:0 auto 0 0;border-radius:999px;background:linear-gradient(90deg,#FF4D73,#FF8FA8);transition:width .6s cubic-bezier(.2,.8,.2,1)}
+.live-bar em{position:absolute;top:-3px;width:2px;height:14px;background:rgba(255,255,255,.35);border-radius:2px}
+.live-foot{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:#CDBFBB;align-items:center}
+.live-foot b{color:#fff}
+.avatars{display:flex}
+.avatars span{width:26px;height:26px;border-radius:50%;border:2px solid var(--dark);margin-left:-8px;display:grid;place-items:center;font-size:10px;font-weight:800;color:#fff}
+.avatars span:first-child{margin-left:0}
+.live-flash{position:absolute;opacity:0}
+.unlock{font-size:13px;font-weight:700;color:#7BE3A9;min-height:20px;transition:opacity .3s}
+
+/* ===== O que é ===== */
+.about{padding:96px 0;background:var(--surface);border-block:1px solid var(--line)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}
+.steps{margin-top:36px;display:grid;gap:4px}
+.step{display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 0;border-top:1px solid var(--line)}
+.step:last-child{border-bottom:1px solid var(--line)}
+.step-n{font-family:var(--serif);font-size:30px;font-style:italic;color:var(--cerise);line-height:1}
+.step h3{font-size:18px;font-weight:700;margin-bottom:4px}
+.step p{font-size:15px;color:var(--muted);line-height:1.55}
+.sim{background:var(--bg);border:1px solid var(--line);border-radius:var(--r-lg);padding:32px;position:sticky;top:100px}
+.sim-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+.sim-head h3{font-family:var(--serif);font-weight:500;font-size:26px;letter-spacing:-.02em}
+.sim-head p{font-size:14px;color:var(--muted);margin-top:4px}
+.sim-chip{font-size:12px;font-weight:800;color:var(--cerise);background:var(--cerise-soft);padding:6px 12px;border-radius:999px;white-space:nowrap}
+.sim-result{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
+.sim-box{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:16px 18px}
+.sim-box span{display:block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.sim-box b{display:block;font-family:var(--serif);font-weight:500;font-size:36px;letter-spacing:-.02em;margin-top:4px;font-variant-numeric:tabular-nums}
+.sim-box.green b{color:var(--green)}
+.sim-range{margin-top:24px}
+.sim-range label{display:flex;justify-content:space-between;font-size:14px;font-weight:700;margin-bottom:10px}
+.sim-range label b{color:var(--cerise)}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:8px;border-radius:999px;background:linear-gradient(90deg,var(--cerise) var(--p,0%),var(--line) var(--p,0%));outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:#fff;border:3px solid var(--cerise);box-shadow:0 4px 12px rgba(194,24,63,.35);cursor:grab}
+input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:#fff;border:3px solid var(--cerise);cursor:grab}
+.ladder{margin-top:22px;display:grid;gap:8px}
+.tier{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;padding:12px 16px;border-radius:14px;border:1px solid var(--line);background:var(--surface);transition:all .3s}
+.tier .ic{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--bg-2);color:var(--muted)}
+.tier .ic svg{width:14px;height:14px}
+.tier .lbl{font-size:14px;font-weight:600;color:var(--ink-2)}
+.tier .lbl small{display:block;font-size:12px;font-weight:500;color:var(--muted)}
+.tier .val{font-weight:800;font-variant-numeric:tabular-nums}
+.tier.on{border-color:#BFE3CF;background:var(--green-soft)}
+.tier.on .ic{background:var(--green);color:#fff}
+.tier.cur{border-color:var(--green);box-shadow:0 0 0 3px rgba(30,138,90,.12)}
+.sim-note{font-size:13px;color:var(--muted);margin-top:16px;line-height:1.5}
+
+/* ===== Rodadas ===== */
+.section{padding:96px 0}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:36px}
+.sorts{display:flex;gap:8px;flex-wrap:wrap}
+.sort{height:40px;padding:0 16px;border-radius:999px;border:1px solid var(--line);background:var(--surface);font-size:14px;font-weight:600;color:var(--ink-2);transition:all .2s}
+.sort:hover{border-color:var(--ink)}
+.sort.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.card{background:var(--surface);border-radius:22px;overflow:hidden;border:1px solid var(--line);display:flex;flex-direction:column;transition:transform .25s ease,box-shadow .25s ease}
+.card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.card-media{position:relative;aspect-ratio:4/5;background:var(--bg-2);overflow:hidden;cursor:pointer}
+.card-media img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.card:hover .card-media img{transform:scale(1.05)}
+.chip{position:absolute;display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 11px;border-radius:999px;font-size:12px;font-weight:800;font-variant-numeric:tabular-nums}
+.chip svg{width:14px;height:14px}
+.chip-time{left:12px;top:12px;background:rgba(255,255,255,.94);color:var(--ink)}
+.chip-time.urgent{background:var(--cerise);color:#fff}
+.chip-off{right:12px;top:12px;background:var(--green);color:#fff}
+.card-body{padding:18px 18px 18px;display:flex;flex-direction:column;gap:14px;flex:1}
+.card-cat{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.card-name{font-size:17px;font-weight:700;line-height:1.3;margin-top:4px;cursor:pointer;min-height:2.6em;overflow-wrap:anywhere}
+.card-price{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.card-price b{font-family:var(--serif);font-size:30px;font-weight:500;letter-spacing:-.02em;line-height:1}
+.card-price s{font-size:14px;color:var(--muted)}
+.card-price small{width:100%;font-size:12px;color:var(--muted);font-weight:600}
+.prog{display:grid;gap:8px}
+.prog-bar{position:relative;height:6px;border-radius:999px;background:var(--bg-2)}
+.prog-bar span{position:absolute;inset:0 auto 0 0;border-radius:999px;background:var(--cerise)}
+.prog-bar em{position:absolute;top:-2px;width:2px;height:10px;border-radius:2px;background:#fff;box-shadow:0 0 0 1px var(--line)}
+.prog-info{display:flex;justify-content:space-between;gap:8px;font-size:13px;line-height:1.35}
+.prog-info .who{color:var(--muted);white-space:nowrap}
+.prog-info .who b{color:var(--ink)}
+.next{font-size:13px;font-weight:700;color:var(--green);background:var(--green-soft);padding:9px 12px;border-radius:10px;line-height:1.35}
+.next.max{color:var(--cerise);background:var(--cerise-soft)}
+.card-actions{display:grid;grid-template-columns:1fr 46px;gap:8px;margin-top:auto}
+.card-actions .btn{height:46px;padding:0 14px;font-size:14px}
+.share-sq{height:46px;border-radius:999px;border:1.5px solid var(--line);display:grid;place-items:center;color:var(--wa);transition:all .2s}
+.share-sq:hover{border-color:var(--wa);background:#EAF8F0}
+.share-sq svg{width:20px;height:20px}
+.share-fab{display:none;position:absolute;right:8px;bottom:8px;width:36px;height:36px;border-radius:50%;background:#fff;color:var(--wa);place-items:center;box-shadow:0 6px 16px -6px rgba(0,0,0,.35)}
+.share-fab svg{width:19px;height:19px}
+.more{display:flex;justify-content:center;margin-top:36px}
+.more .btn{min-width:260px}
+
+/* ===== Categorias ===== */
+.cats{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:260px 260px 240px;gap:18px}
+.cat{position:relative;border-radius:var(--r-lg);overflow:hidden;display:block;background:var(--bg-2);isolation:isolate}
+.cat img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .7s ease;z-index:-2}
+.cat:hover img{transform:scale(1.06)}
+.cat::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,10,12,0) 30%,rgba(20,10,12,.35) 55%,rgba(20,10,12,.88) 100%);z-index:-1}
+.cat-txt h3,.cat-txt p{text-shadow:0 2px 14px rgba(0,0,0,.35)}
+.cat-big{grid-column:span 2;grid-row:span 2}
+.cat-txt{position:absolute;left:24px;right:24px;bottom:22px;color:#fff;display:flex;justify-content:space-between;align-items:flex-end;gap:14px}
+.cat-txt h3{font-family:var(--serif);font-weight:500;font-size:28px;letter-spacing:-.02em;line-height:1.05}
+.cat-big .cat-txt h3{font-size:46px}
+.cat-txt p{font-size:14px;color:rgba(255,255,255,.82);margin-top:6px;line-height:1.4}
+.cat-count{display:inline-block;margin-top:12px;font-size:12px;font-weight:800;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);padding:6px 11px;border-radius:999px}
+.cat-arrow{width:46px;height:46px;border-radius:50%;background:#fff;color:var(--ink);display:grid;place-items:center;flex:none;transition:transform .25s}
+.cat:hover .cat-arrow{transform:rotate(-45deg)}
+.cat-arrow svg{width:18px;height:18px}
+
+/* ===== Share ===== */
+.share{background:var(--dark);color:#fff;padding:104px 0;position:relative;overflow:hidden}
+.share::before{content:'';position:absolute;width:720px;height:720px;border-radius:50%;background:radial-gradient(circle,rgba(194,24,63,.35),transparent 65%);right:-160px;top:-220px;pointer-events:none}
+.share-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:72px;align-items:center;position:relative}
+.share .kicker{color:#C9B6B1}
+.share .lead{color:#C9B6B1}
+.share .h2 em{color:#FF7A97}
+.share-points{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:36px}
+.sp{background:var(--dark-2);border:1px solid rgba(255,255,255,.08);border-radius:var(--r-md);padding:20px}
+.sp b{display:block;font-family:var(--serif);font-weight:500;font-size:34px;color:#FF7A97;line-height:1}
+.sp span{display:block;font-size:14px;color:#D8C9C5;margin-top:10px;line-height:1.45}
+.share-btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.phone{width:min(360px,100%);margin:0 auto;background:#0E0B0C;border-radius:44px;padding:12px;box-shadow:0 40px 80px -30px rgba(0,0,0,.7),inset 0 0 0 1px rgba(255,255,255,.08)}
+.phone-screen{border-radius:34px;overflow:hidden;background:#EFE7DE}
+.wa-head{background:#0F5E4A;color:#fff;display:flex;align-items:center;gap:10px;padding:16px 16px 12px}
+.wa-head .av{width:36px;height:36px;border-radius:50%;background:var(--cerise);display:grid;place-items:center;font-weight:800;font-size:14px}
+.wa-head strong{display:block;font-size:15px}
+.wa-head span{font-size:12px;color:#BFE3D6}
+.wa-body{padding:16px 12px 18px;display:flex;flex-direction:column;gap:8px;min-height:430px}
+.msg{max-width:84%;padding:8px 10px 6px;border-radius:10px;font-size:13.5px;line-height:1.4;color:#1B1B1B;background:#fff;box-shadow:0 1px 1px rgba(0,0,0,.08);opacity:0;transform:translateY(8px);transition:all .4s ease}
+.msg.show{opacity:1;transform:none}
+.msg.me{align-self:flex-end;background:#D7F8C8}
+.msg time{display:block;text-align:right;font-size:10.5px;color:#7C8B80;margin-top:2px}
+.msg .lp{display:flex;gap:8px;background:#F2F2F2;border-radius:8px;overflow:hidden;margin-bottom:6px}
+.msg .lp img{width:64px;height:72px;object-fit:cover;flex:none}
+.msg .lp div{padding:6px 8px 6px 0}
+.msg .lp strong{display:block;font-size:12.5px}
+.msg .lp span{display:block;font-size:11.5px;color:#666;line-height:1.3}
+.msg-sys{align-self:center;background:#FFF5C4;color:#5B4E12;font-size:12px;font-weight:700;padding:6px 12px;border-radius:8px;opacity:0;transition:opacity .4s}
+.msg-sys.show{opacity:1}
+
+/* ===== Garantias + FAQ ===== */
+.trust{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:72px}
+.tcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:24px}
+.tcard .ti{width:46px;height:46px;border-radius:14px;background:var(--cerise-soft);color:var(--cerise);display:grid;place-items:center;margin-bottom:16px}
+.tcard .ti svg{width:22px;height:22px}
+.tcard h3{font-size:17px;font-weight:700;margin-bottom:6px}
+.tcard p{font-size:14px;color:var(--muted);line-height:1.55}
+.faq-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:64px;align-items:start}
+.faq{border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 0;font-size:17px;font-weight:700;cursor:pointer}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary i{width:32px;height:32px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;flex:none;transition:transform .25s,background .25s;font-style:normal;font-size:18px}
+.faq details[open] summary i{transform:rotate(45deg);background:var(--ink);color:#fff;border-color:var(--ink)}
+.faq details p{padding:0 48px 22px 0;color:var(--muted);font-size:15px;line-height:1.65}
+
+/* ===== Lista VIP ===== */
+.vip{padding:0 0 96px}
+.vip-card{display:grid;grid-template-columns:.9fr 1.1fr;background:var(--surface);border:1px solid var(--line);border-radius:36px;overflow:hidden}
+.vip-media{position:relative;min-height:560px;background:var(--bg-2)}
+.vip-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.push{position:absolute;left:24px;right:24px;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-radius:18px;padding:12px 14px;display:flex;gap:12px;align-items:flex-start;box-shadow:0 18px 40px -18px rgba(0,0,0,.45);opacity:0;transform:translateY(14px);transition:all .6s cubic-bezier(.2,.8,.2,1)}
+.push.show{opacity:1;transform:none}
+.push .pi{width:38px;height:38px;border-radius:10px;background:var(--cerise);display:grid;place-items:center;flex:none}
+.push .pi svg{width:20px;height:20px}
+.push strong{display:flex;justify-content:space-between;gap:8px;font-size:13px}
+.push strong small{font-weight:500;color:var(--muted)}
+.push p{font-size:13px;color:var(--ink-2);line-height:1.4;margin-top:2px}
+.push-1{bottom:118px}
+.push-2{bottom:28px}
+.vip-body{padding:56px}
+.vip-proof{display:flex;align-items:center;gap:12px;margin-top:24px;font-size:14px;color:var(--muted)}
+.vip-proof b{color:var(--ink)}
+.vip-proof .avatars span{border-color:#fff}
+.form{margin-top:28px;display:grid;gap:14px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:13px;font-weight:700;color:var(--ink-2)}
+.field input{height:54px;border-radius:14px;border:1.5px solid var(--line);background:var(--bg);padding:0 16px;font-size:15px;outline:none;transition:border-color .2s,background .2s}
+.field input:focus{border-color:var(--ink);background:#fff}
+.field input.err{border-color:var(--cerise)}
+.ints-l{font-size:13px;font-weight:700;color:var(--ink-2);margin-bottom:8px;display:block}
+.ints{display:flex;flex-wrap:wrap;gap:8px}
+.int{height:40px;padding:0 16px;border-radius:999px;border:1.5px solid var(--line);font-size:14px;font-weight:600;transition:all .2s;background:#fff}
+.int.on{background:var(--cerise-soft);border-color:var(--cerise);color:var(--cerise)}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--muted);line-height:1.45}
+.consent input{margin-top:3px;accent-color:var(--cerise);width:16px;height:16px;flex:none}
+.form .btn{width:100%;height:56px;font-size:16px}
+.vip-perks{display:flex;gap:22px;flex-wrap:wrap;margin-top:22px;font-size:14px;color:var(--ink-2);font-weight:600}
+.vip-perks span{display:flex;align-items:center;gap:8px}
+.vip-perks svg{width:18px;height:18px;color:var(--green)}
+.ok{display:none;text-align:left;margin-top:28px;padding:28px;border-radius:var(--r-md);background:var(--green-soft);border:1px solid #BFE3CF}
+.ok.show{display:block}
+.ok h3{font-family:var(--serif);font-weight:500;font-size:28px;color:var(--green)}
+.ok p{color:var(--ink-2);margin-top:8px}
+
+/* ===== Footer ===== */
+footer{background:var(--ink);color:#CFC3BE;padding:72px 0 28px}
+.foot{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:48px}
+footer .logo{color:#fff}
+.foot-brand p{margin-top:16px;font-size:15px;line-height:1.6;max-width:320px}
+.socials{display:flex;gap:10px;margin-top:22px}
+.socials a{width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.16);display:grid;place-items:center;color:#fff;transition:background .2s}
+.socials a:hover{background:rgba(255,255,255,.1)}
+.socials svg{width:18px;height:18px}
+.fcol h4{color:#fff;font-size:14px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin-bottom:18px}
+.fcol a{display:block;font-size:15px;padding:5px 0;transition:color .2s}
+.fcol a:hover{color:#fff}
+.foot-bottom{margin-top:56px;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;align-items:center;gap:16px 32px;flex-wrap:wrap;font-size:13px;color:#958882}
+.foot-legal{display:flex;flex-direction:column;gap:4px}
+.credit{display:inline-flex;align-items:center;gap:12px;color:#958882;font-size:12px;letter-spacing:.06em;text-transform:uppercase;font-weight:700;transition:opacity .2s}
+.credit img{height:30px;width:auto;opacity:.9}
+.credit:hover img{opacity:1}
+
+/* ===== Modal rodada ===== */
+.modal{position:fixed;inset:0;z-index:80;background:rgba(23,17,15,.6);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .25s}
+.modal.open{opacity:1;pointer-events:auto}
+.panel{width:min(1080px,100%);max-height:calc(100vh - 48px);max-height:calc(100dvh - 48px);overflow:auto;background:var(--surface);border-radius:32px;display:grid;grid-template-columns:.9fr 1.1fr;position:relative;transform:translateY(16px) scale(.98);transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+.modal.open .panel{transform:none}
+.panel-media{background:var(--bg-2);position:relative;min-height:100%}
+.panel-media img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.panel-body{padding:40px}
+.close{position:absolute;top:16px;right:16px;width:44px;height:44px;border-radius:50%;background:var(--bg);display:grid;place-items:center;z-index:2;font-size:22px}
+.close:hover{background:var(--bg-2)}
+.pb-top{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.tag{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);background:var(--bg);padding:7px 12px;border-radius:999px}
+.tag-time{color:var(--cerise);background:var(--cerise-soft);font-variant-numeric:tabular-nums;letter-spacing:.04em}
+.panel h3{font-family:var(--serif);font-weight:500;font-size:38px;letter-spacing:-.02em;line-height:1.05;margin-top:16px;padding-right:40px}
+.pb-price{display:flex;align-items:baseline;gap:12px;margin-top:18px;flex-wrap:wrap}
+.pb-price b{font-family:var(--serif);font-weight:500;font-size:48px;letter-spacing:-.03em;line-height:1}
+.pb-price s{color:var(--muted)}
+.pb-price small{font-size:13px;font-weight:700;color:var(--green);background:var(--green-soft);padding:5px 10px;border-radius:999px}
+.pb-sub{font-size:14px;color:var(--muted);margin-top:10px}
+.pb-label{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin:24px 0 10px}
+.sizes{display:flex;gap:8px;flex-wrap:wrap}
+.size{min-width:52px;height:44px;padding:0 12px;border-radius:12px;border:1.5px solid var(--line);font-weight:700;font-size:14px}
+.size.on{border-color:var(--ink);background:var(--ink);color:#fff}
+.join{margin-top:22px;display:grid;gap:12px}
+.join .form-row{gap:10px}
+.join .btn{width:100%;height:56px;font-size:16px}
+.join-note{font-size:13px;color:var(--muted);display:flex;gap:8px;align-items:flex-start;line-height:1.45}
+.join-note svg{width:16px;height:16px;flex:none;margin-top:2px;color:var(--green)}
+.joined{display:none;margin-top:22px;padding:24px;border-radius:var(--r-md);background:var(--green-soft);border:1px solid #BFE3CF}
+.joined.show{display:block}
+.joined h4{font-family:var(--serif);font-weight:500;font-size:26px;color:var(--green)}
+.joined p{font-size:14px;color:var(--ink-2);margin-top:6px;line-height:1.55}
+.joined .share-btns{margin-top:16px}
+.joined .btn{height:46px;font-size:14px;padding:0 18px}
+
+/* ===== Toasts ===== */
+.toast-live{position:fixed;left:20px;bottom:20px;z-index:60;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:10px 14px 10px 10px;display:flex;gap:10px;align-items:center;box-shadow:var(--shadow);max-width:340px;opacity:0;transform:translateY(16px);transition:all .45s cubic-bezier(.2,.8,.2,1);pointer-events:none}
+.toast-live.show{opacity:1;transform:none}
+.toast-live img{width:44px;height:44px;border-radius:10px;object-fit:cover;flex:none}
+.toast-live p{font-size:13px;line-height:1.35;color:var(--ink-2)}
+.toast-live p b{color:var(--ink)}
+.toast-live small{display:block;font-size:11.5px;color:var(--muted);margin-top:2px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);z-index:90;background:var(--ink);color:#fff;padding:12px 20px;border-radius:999px;font-size:14px;font-weight:600;opacity:0;transition:all .3s;pointer-events:none}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* ===== Reveal ===== */
+.js .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1)}
+.js .reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+
+/* ===== Responsivo ===== */
+@media (max-width:1180px){
+  .grid{gap:16px}
+  .navlinks{gap:20px;margin-left:8px}
+  .hero-grid{gap:36px}
+  .trust{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:980px){
+  .navlinks,.nav .btn-enter{display:none}
+  .burger{display:grid}
+  .mobile-menu{display:block;position:fixed;inset:0;top:0;z-index:70;background:var(--bg);padding:24px;transform:translateX(100%);transition:transform .3s ease}
+  .mobile-menu.open{transform:none}
+  .mm-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:36px}
+  .mobile-menu nav a{display:block;font-family:var(--serif);font-size:34px;padding:12px 0;border-bottom:1px solid var(--line)}
+  .mobile-menu .btn{width:100%;margin-top:28px}
+  .hero-grid,.about-grid,.share-grid,.faq-grid,.vip-card,.panel{grid-template-columns:1fr}
+  .bento-tall{min-height:420px}
+  .sim{position:static}
+  .cats{grid-template-columns:1fr 1fr;grid-template-rows:none;grid-auto-rows:220px}
+  .cat-big{grid-row:auto;grid-column:span 2}
+  .cat-big{min-height:300px}
+  .foot{grid-template-columns:1fr 1fr 1fr}
+  .foot-brand{grid-column:1/-1}
+  .vip-media{min-height:420px}
+  .panel-media{min-height:340px}
+  .about,.section,.share{padding:72px 0}
+}
+@media (max-width:1080px){
+  .card-body{padding:14px;gap:11px}
+  .card-name{font-size:15px}
+  .card-price b{font-size:25px}
+  .card-price s{font-size:12px}
+  .prog-info{font-size:12px}
+  .next{font-size:12px;padding:8px 10px}
+  .card-actions{grid-template-columns:1fr 42px}
+  .card-actions .btn{height:44px;font-size:13.5px;padding:0 10px}
+  .share-sq{height:44px}
+}
+@media (max-width:860px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:380px){
+  .hero-trust{grid-template-columns:1fr 1fr 1fr;gap:8px}
+}
+@media (max-width:640px){
+  .wrap{width:calc(100% - 32px)}
+  .nav{height:64px}
+  .logo{font-size:26px}
+  .nav .btn{display:none}
+  .hero{padding:20px 0 48px}
+  .hero .lead{font-size:16px}
+  .hero-ctas .btn{flex:1 1 100%}
+  .hero-trust{grid-template-columns:repeat(3,1fr);gap:10px}
+  .hero-trust strong{font-size:22px}
+  .hero-trust span{font-size:12px}
+  .bento{grid-template-columns:1fr}
+  .bento-tall{grid-row:auto;min-height:0;height:380px}
+  .bento-small{display:none}
+  .live{order:-1}
+  .grid{grid-template-columns:repeat(2,1fr);gap:12px}
+  .card{border-radius:18px}
+  .card:hover{transform:none}
+  .card-body{padding:12px 11px 12px;gap:9px}
+  .card-cat{font-size:10px;letter-spacing:.1em}
+  .card-name{font-size:14px;line-height:1.28;min-height:3.84em}
+  .card-price{gap:2px 6px}
+  .card-price b{font-size:21px}
+  .card-price s{font-size:11.5px}
+  .card-price small{font-size:11px}
+  .chip{height:26px;padding:0 8px;font-size:11px;gap:4px}
+  .chip svg{width:12px;height:12px}
+  .chip-time{left:8px;top:8px}
+  .chip-off{right:8px;top:8px}
+  .prog-info{font-size:12px}
+  .next{font-size:11.5px;padding:7px 8px;min-height:3.4em;display:flex;align-items:center}
+  .card-actions{grid-template-columns:1fr}
+  .card-actions .btn{height:42px;font-size:clamp(11.5px,3.45vw,13px);padding:0 4px;white-space:nowrap;letter-spacing:-.01em}
+  .share-sq{display:none}
+  .share-fab{display:grid}
+  .more .btn{width:100%}
+  .sorts{width:100%;overflow-x:auto;flex-wrap:nowrap;padding-bottom:4px}
+  .sort{flex:none}
+  .cats{gap:10px;grid-auto-rows:170px}
+  .cat-big{min-height:260px}
+  .cat{border-radius:20px}
+  .cat-txt{left:14px;right:14px;bottom:14px}
+  .cat-txt h3{font-size:19px}
+  .cat-txt p,.cat .cat-arrow{display:none}
+  .cat-big .cat-txt h3{font-size:32px}
+  .cat-big .cat-txt p{display:block;font-size:13px}
+  .cat-big .cat-arrow{display:grid;width:40px;height:40px}
+  .cat-count{margin-top:8px;font-size:11px;padding:5px 9px}
+  .field input{font-size:16px}
+  .sec-head{margin-bottom:24px}
+  .sec-head .btn-ghost{display:none}
+  .h2{font-size:clamp(30px,8.4vw,40px)}
+  .hero h1{font-size:clamp(40px,11.5vw,52px)}
+  .share-btns{gap:10px}
+  .faq summary{font-size:16px;padding:18px 0}
+  .faq details p{padding-right:8px}
+  .foot-bottom{flex-direction:column;align-items:flex-start}
+  .share-points{grid-template-columns:1fr}
+  .share-btns .btn{flex:1 1 calc(50% - 6px);padding:0 12px}
+  .trust{grid-template-columns:1fr}
+  .vip-body{padding:28px 22px}
+  .form-row{grid-template-columns:1fr}
+  .vip-media{min-height:340px}
+  .push{left:14px;right:14px}
+  .push-1{bottom:auto;top:16px}
+  .push-2{bottom:16px}
+  .foot{grid-template-columns:1fr 1fr}
+  .modal{padding:0;align-items:flex-end}
+  .panel{border-radius:28px 28px 0 0;max-height:94vh}
+  .panel-body{padding:26px 20px 28px}
+  .panel h3{font-size:30px}
+  .pb-price b{font-size:40px}
+  .panel-media{min-height:260px}
+  .sim{padding:22px}
+  .sim-box b{font-size:30px}
+  .toast-live{display:none}
+  .panel{max-height:94dvh}
+}
 </style>
 </head>
 <body>
-<div class="notice">Demonstração visual da experiência Cerise</div>
-<header class="nav">
-  <div class="wrap navin">
-    <a class="logo" href="#top">cerise<b>.</b></a>
-    <nav class="navlinks">
+
+<div class="announce" aria-label="Avisos">
+  <div class="announce-track" id="announce"></div>
+</div>
+
+<header id="hdr">
+  <div class="wrap nav">
+    <a class="logo" href="#top" aria-label="Cerise — início">
+      <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 4c1 4 3 7 7 9" stroke="#3B6B3A" stroke-width="2" stroke-linecap="round"/><path d="M16 4c-1 5-4 8-7 10" stroke="#3B6B3A" stroke-width="2" stroke-linecap="round"/><path d="M17 4c3-1 6 0 8 2-3 1-6 1-8-2Z" fill="#4E8A4C"/><circle cx="9.5" cy="20.5" r="7" fill="#C2183F"/><circle cx="22.5" cy="19.5" r="7" fill="#A0102F"/><circle cx="7.5" cy="18" r="1.6" fill="#fff" opacity=".55"/></svg>
+      cerise
+    </a>
+    <nav class="navlinks" aria-label="Principal">
       <a href="#como-funciona">Como funciona</a>
-      <a href="#rodadas">Produtos</a>
-      <a href="#passos">Jornal</a>
-      <a href="#newsletter">Newsletter</a>
+      <a href="#rodadas">Rodadas abertas</a>
+      <a href="#categorias">Categorias</a>
+      <a href="#duvidas">Dúvidas</a>
     </nav>
-    <div class="navright"><a class="outline" href="#rodadas">Explorar</a><a class="btn" href="#newsletter">Receber ofertas</a></div>
+    <div class="navright">
+      <button class="iconbtn" aria-label="Buscar" onclick="document.getElementById('rodadas').scrollIntoView({behavior:'smooth'})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+      <button class="iconbtn" aria-label="Minhas rodadas" onclick="toast(myRounds.size?('Você está em '+myRounds.size+(myRounds.size>1?' rodadas':' rodada')+'.'):'Você ainda não entrou em nenhuma rodada.')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 7h12l-1 13H7L6 7Z"/><path d="M9 7V6a3 3 0 0 1 6 0v1"/></svg><span class="count" id="myCount" hidden>0</span></button>
+      <a class="btn btn-ghost btn-enter" href="#lista-vip">Entrar na lista VIP</a>
+      <button class="iconbtn burger" aria-label="Abrir menu" onclick="menu(true)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
   </div>
 </header>
+
+<div class="mobile-menu" id="mm" aria-hidden="true">
+  <div class="mm-top">
+    <span class="logo">cerise</span>
+    <button class="iconbtn" aria-label="Fechar menu" onclick="menu(false)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  </div>
+  <nav onclick="menu(false)">
+    <a href="#como-funciona">Como funciona</a>
+    <a href="#rodadas">Rodadas abertas</a>
+    <a href="#categorias">Categorias</a>
+    <a href="#duvidas">Dúvidas</a>
+  </nav>
+  <a class="btn btn-primary" href="#lista-vip" onclick="menu(false)">Entrar na lista VIP</a>
+</div>
+
 <main id="top">
-  <section class="hero">
-    <div class="heropic"><img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1400&q=85&fit=crop" alt="Foto placeholder editorial de consumidores e produtos"></div>
-    <div class="herotext"><div class="panel"><span class="tag">COMPRAS COLETIVAS OFICIAIS</span><h1>Comprar junto pode render um preço melhor.</h1><p>A Cerise reúne pessoas em torno de produtos selecionados. Você acompanha a rodada, reserva sua quantidade e vê o valor evoluir conforme o grupo cresce.</p><div class="hero-actions"><a class="btn" href="#rodadas">Ver rodadas em destaque</a><a class="outline" href="#como-funciona">Entender a mecânica</a></div><div class="hero-note">Rodadas ilustrativas • Sem reserva ou pagamento real nesta demonstração</div></div></div>
-  </section>
 
-  <div class="quick"><div class="wrap quickin">
-    <div class="quickcard"><span class="quickn">01</span><div><strong>Escolha uma rodada</strong><small>Veja os produtos e as faixas de preço</small></div></div>
-    <div class="quickcard"><span class="quickn">02</span><div><strong>Reserve sua quantidade</strong><small>Participe do grupo de forma simples</small></div></div>
-    <div class="quickcard"><span class="quickn">03</span><div><strong>Acompanhe o desconto</strong><small>O valor pode melhorar com mais adesões</small></div></div>
-  </div></div>
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="reveal">
+      <span class="kicker">Compras coletivas</span>
+      <h1>Quanto mais gente entra, <em>menor</em> o preço.</h1>
+      <p class="lead">Na Cerise você entra num grupo de compra, chama quem também quer o produto e todo mundo paga o menor preço que o grupo alcançar em 72 horas.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#rodadas">Ver rodadas abertas <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn-ghost" href="#como-funciona">Como funciona</a>
+      </div>
+      <div class="hero-trust">
+        <div><strong>72h</strong><span>por rodada, com contagem regressiva</span></div>
+        <div><strong>até 32%</strong><span>de desconto quando o grupo cresce</span></div>
+        <div><strong>R$ 0</strong><span>cobrado antes do grupo fechar</span></div>
+      </div>
+    </div>
 
-  <section class="wrap story" id="como-funciona">
-    <div class="storypic"><img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1200&q=85&fit=crop" alt="Pessoas comprando juntas, imagem ilustrativa"></div>
-    <div>
-      <span class="tag">O QUE É A CERISE</span>
-      <h2>Uma plataforma pensada para quem quer unir interesse e economizar.</h2>
-      <p>A Cerise apresenta rodadas de compras coletivas com tempo limitado. Cada produto mostra suas faixas de preço, a quantidade já reservada e o próximo objetivo do grupo. Quanto mais pessoas participam, maior pode ser a vantagem para todos.</p>
+    <div class="bento reveal">
+      <div class="bento-photo bento-tall"><img src="assets/h-main.jpg" alt="Mulher caminhando na rua com casaco xadrez e bolsa"></div>
+      <div class="live" aria-live="polite">
+        <div class="live-top">
+          <span class="live-dot"><i></i> Rodada ao vivo</span>
+          <span class="live-clock" id="liveClock">--:--:--</span>
+        </div>
+        <div class="live-prod">
+          <img src="assets/p-bomber.jpg" alt="">
+          <div><strong>Jaqueta Bomber Caramelo</strong><span>Masculino · P ao GG</span></div>
+        </div>
+        <div>
+          <div class="live-price"><b id="livePrice">R$ 289,00</b><s>R$ 289,00</s></div>
+          <div class="unlock" id="liveUnlock"></div>
+        </div>
+        <div class="live-bar" id="liveBar"><span id="liveFill" style="width:0%"></span></div>
+        <div class="live-foot">
+          <div class="avatars" id="liveAv"></div>
+          <span><b id="liveBuyers">0</b> no grupo · <span id="liveNext">próxima faixa em 10</span></span>
+        </div>
+      </div>
+      <div class="bento-photo bento-small"><img src="assets/h-rack.jpg" alt="Arara com roupas em tons claros"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= O QUE É ================= -->
+<section class="about" id="como-funciona">
+  <div class="wrap about-grid">
+    <div class="reveal">
+      <span class="kicker">O que é a Cerise</span>
+      <h2 class="h2">Uma loja onde <em>o grupo</em> define o preço.</h2>
+      <p class="lead">A Cerise junta pessoas interessadas no mesmo produto e negocia como atacado: moda, eletrônicos, ferramentas, casa e automotivo. Cada produto abre uma rodada de 72 horas com faixas de desconto. A cada nova pessoa no grupo, o preço chega mais perto da próxima faixa e, quando a rodada fecha, todo mundo paga o mesmo valor final, o menor que o grupo alcançou.</p>
       <div class="steps">
-        <div><b>1</b><div><strong>A Cerise abre uma rodada</strong><small>Você vê produto, tempo restante e regras da oferta coletiva.</small></div></div>
-        <div><b>2</b><div><strong>O grupo ganha força</strong><small>Cada reserva ajuda a avançar rumo às próximas faixas de preço.</small></div></div>
-        <div><b>3</b><div><strong>O preço final é consolidado</strong><small>No encerramento, a rodada define o valor alcançado pelo grupo.</small></div></div>
+        <div class="step"><span class="step-n">01</span><div><h3>Escolha o produto</h3><p>Veja as rodadas abertas, o preço atual e quanto tempo falta para cada uma fechar.</p></div></div>
+        <div class="step"><span class="step-n">02</span><div><h3>Entre no grupo em 30 segundos</h3><p>Só nome, WhatsApp e tamanho ou modelo. Sem cartão e sem pagamento agora.</p></div></div>
+        <div class="step"><span class="step-n">03</span><div><h3>Chame mais gente</h3><p>Compartilhe pelo WhatsApp. Cada pessoa que entra aproxima a próxima faixa de desconto para todos.</p></div></div>
+        <div class="step"><span class="step-n">04</span><div><h3>Pague o menor preço</h3><p>Em 72 horas a rodada fecha sozinha. Você recebe o valor final e o link de pagamento no WhatsApp.</p></div></div>
       </div>
     </div>
-  </section>
 
-  <section class="catalog" id="rodadas">
-    <div class="wrap">
-      <div class="sectionhead">
-        <div><span class="tag">RODADAS EM DESTAQUE</span><h2>Descubra produtos para comprar em grupo.</h2></div>
-        <p>Explore moda, eletrônicos, ferramentas e itens para casa em uma vitrine pensada para tornar a dinâmica das compras coletivas fácil de entender logo no primeiro olhar.</p>
+    <div class="sim reveal" id="sim">
+      <div class="sim-head">
+        <div><h3>Simule uma rodada</h3><p>Arraste e veja o preço cair conforme o grupo cresce.</p></div>
+        <span class="sim-chip">Jaqueta Bomber</span>
       </div>
-      <div class="filters" id="filters">
-        <button class="filter active" data-filter="Todos">Todos os produtos</button>
-        <button class="filter" data-filter="Eletrônicos">Eletrônicos</button>
-        <button class="filter" data-filter="Moda">Moda</button>
-        <button class="filter" data-filter="Ferramentas">Ferramentas</button>
-        <button class="filter" data-filter="Casa">Casa</button>
+      <div class="sim-result">
+        <div class="sim-box"><span>Preço para todos</span><b id="simPrice">R$ 289</b></div>
+        <div class="sim-box green"><span>Economia por pessoa</span><b id="simSave">R$ 0</b></div>
       </div>
-      <div class="cards" id="cards"></div>
+      <div class="sim-range">
+        <label for="simRange"><span>Pessoas no grupo</span><b id="simN">1</b></label>
+        <input type="range" id="simRange" min="1" max="60" value="1">
+      </div>
+      <div class="ladder" id="simLadder"></div>
+      <p class="sim-note">Valores ilustrativos. Cada produto tem sua própria escada de preços, definida com o fornecedor.</p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="wrap editorial">
-    <div class="editcard"><img src="https://images.unsplash.com/photo-1498049794561-7780e7231661?w=1200&q=85&fit=crop" alt="Categoria eletrônicos"><div class="overlay"><small>ELETRÔNICOS</small><h3>Tecnologia também pode entrar em uma compra coletiva.</h3><a href="#rodadas">Explorar produtos ↗</a></div></div>
-    <div class="editcard"><img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=1200&q=85&fit=crop" alt="Categoria moda"><div class="overlay"><small>MODA</small><h3>Seu estilo com a força do grupo.</h3><a href="#rodadas">Explorar produtos ↗</a></div></div>
-  </section>
-
-  <section class="how" id="passos">
-    <div class="wrap">
-      <div class="intro"><span class="tag">COMO PARTICIPAR</span><h2>Uma experiência simples para entender e acompanhar.</h2></div>
-      <div class="howgrid">
-        <div class="howitem"><span>PASSO 01</span><h3>Entre em uma rodada</h3><p>Abra o produto, veja o tempo restante e entenda como as faixas de desconto funcionam.</p></div>
-        <div class="howitem"><span>PASSO 02</span><h3>Reserve suas unidades</h3><p>Informe seu nome, contato e quantidade desejada para manifestar participação.</p></div>
-        <div class="howitem"><span>PASSO 03</span><h3>Acompanhe o resultado</h3><p>Veja o avanço da rodada, a meta para a próxima faixa e o preço consolidado no fechamento.</p></div>
+<!-- ================= RODADAS ================= -->
+<section class="section" id="rodadas">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <span class="kicker">Rodadas abertas agora</span>
+        <h2 class="h2">Entre antes que o <em>relógio zere.</em></h2>
       </div>
-    </div>
-  </section>
-
-  <section class="benefits">
-    <div class="wrap">
-      <div class="benefitbox">
-        <div class="benefit"><div class="iconcircle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M7 7h10v10H7z"/><path d="M4 10h3M17 10h3M10 4v3M10 17v3"/></svg></div><h4>Great Prices</h4><p>Faixas coletivas pensadas para valorizar a compra em grupo.</p></div>
-        <div class="benefit"><div class="iconcircle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M8 7H4v4"/><path d="M4 11a8 8 0 0 0 14 4"/><path d="M16 17h4v-4"/><path d="M20 13A8 8 0 0 0 6 9"/></svg></div><h4>Free Returns</h4><p>Layout demonstrativo inspirado em experiências modernas de e-commerce.</p></div>
-        <div class="benefit"><div class="iconcircle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3l7 4v5c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V7l7-4z"/><path d="M9.5 12l1.7 1.7L15 10"/></svg></div><h4>Safe Shopping</h4><p>Clareza visual para explicar produto, prazo, unidades e preço atual.</p></div>
-        <div class="benefit"><div class="iconcircle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M7 7h10l1 12H6L7 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg></div><h4>Best Store</h4><p>Percepção de loja organizada, com vitrines amplas e navegação intuitiva.</p></div>
+      <div class="sorts" role="tablist" aria-label="Ordenar rodadas">
+        <button class="sort on" data-sort="end">Terminando primeiro</button>
+        <button class="sort" data-sort="near">Perto do desconto</button>
+        <button class="sort" data-sort="hot">Mais participantes</button>
       </div>
     </div>
-  </section>
+    <div class="grid" id="grid"></div>
+    <div class="more" id="moreWrap"><button class="btn btn-ghost" id="moreBtn">Ver mais rodadas</button></div>
+  </div>
+</section>
 
-  <section class="newsletter" id="newsletter">
-    <div class="wrap newslay">
-      <div class="newsimage"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=900&q=85&fit=crop" alt="Pessoa ilustrativa para seção newsletter"></div>
-      <div class="newstext"><div class="newstextin"><h2>Sign Up for special <br>News & Offers</h2><em>Hand picked special for you...</em><div class="subform"><input placeholder="your name" aria-label="your name"><input placeholder="your email" aria-label="your email"><button>Subscribe!</button></div><div class="checks"><span>Exclusive Product Releases</span><span>Only Subscribers Offers</span></div></div></div>
+<!-- ================= CATEGORIAS ================= -->
+<section class="section" id="categorias" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <span class="kicker">Categorias</span>
+        <h2 class="h2">Do guarda-roupa à garagem, <em>a preço de grupo.</em></h2>
+      </div>
+      <a class="btn btn-ghost" href="#rodadas">Ver todas as rodadas</a>
     </div>
-  </section>
+    <div class="cats reveal">
+      <a class="cat cat-big" href="#rodadas" data-cat="Feminino">
+        <img src="assets/c-feminino.jpg" alt="Mulher com vestido vermelho longo">
+        <div class="cat-txt"><div><h3>Feminino</h3><p>Vestidos, conjuntos, alfaiataria e peças-chave da estação.</p><span class="cat-count" data-count="Feminino"></span></div><span class="cat-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+      </a>
+      <a class="cat" href="#rodadas" data-cat="Masculino">
+        <img src="assets/c-masculino.jpg" alt="Homem de terno azul" style="object-position:center 30%">
+        <div class="cat-txt"><div><h3>Masculino</h3><p>Camisas, jaquetas e básicos.</p><span class="cat-count" data-count="Masculino"></span></div><span class="cat-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+      </a>
+      <a class="cat" href="#rodadas" data-cat="Calçados">
+        <img src="assets/c-calcados.jpg" alt="Sapatos estampados">
+        <div class="cat-txt"><div><h3>Calçados</h3><p>Tênis, scarpins e sandálias.</p><span class="cat-count" data-count="Calçados"></span></div><span class="cat-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+      </a>
+      <a class="cat" href="#rodadas" data-cat="Acessórios">
+        <img src="assets/c-acessorios.jpg" alt="Óculos redondo com armação dourada">
+        <div class="cat-txt"><div><h3>Acessórios</h3><p>Bolsas, óculos e cintos.</p><span class="cat-count" data-count="Acessórios"></span></div><span class="cat-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+      </a>
+      <a class="cat" href="#rodadas" data-cat="Jeans">
+        <img src="assets/c-jeans.jpg" alt="Pilha de calças jeans">
+        <div class="cat-txt"><div><h3>Jeans &amp; básicos</h3><p>As peças que nunca saem do guarda-roupa.</p><span class="cat-count" data-count="Jeans"></span></div><span class="cat-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+      </a>
+      <a class="cat" href="#rodadas" data-cat="Eletrônicos">
+        <img src="assets/c-eletronicos.jpg" alt="Fone de ouvido sobre a mesa">
+        <div class="cat-txt"><div><h3>Eletrônicos</h3><p>Gadgets, fones e smartwatches.</p><span class="cat-count" data-count="Eletrônicos"></span></div><span class="cat-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+      </a>
+      <a class="cat" href="#rodadas" data-cat="Ferramentas">
+        <img src="assets/c-ferramentas.jpg" alt="Painel com ferramentas manuais organizadas">
+        <div class="cat-txt"><div><h3>Ferramentas</h3><p>Manuais, elétricas e kits.</p><span class="cat-count" data-count="Ferramentas"></span></div><span class="cat-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+      </a>
+      <a class="cat" href="#rodadas" data-cat="Casa & Decor">
+        <img src="assets/c-decor.jpg" alt="Sala com poltrona amarela e luminária">
+        <div class="cat-txt"><div><h3>Casa &amp; decor</h3><p>Iluminação, móveis e objetos.</p><span class="cat-count" data-count="Casa & Decor"></span></div><span class="cat-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+      </a>
+      <a class="cat" href="#rodadas" data-cat="Automotivo">
+        <img src="assets/c-automotivo.jpg" alt="Motorista com as mãos no volante">
+        <div class="cat-txt"><div><h3>Automotivo</h3><p>Acessórios para o seu carro.</p><span class="cat-count" data-count="Automotivo"></span></div><span class="cat-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COMPARTILHE ================= -->
+<section class="share" id="compartilhe">
+  <div class="wrap share-grid">
+    <div class="reveal">
+      <span class="kicker">Compartilhe e derrube o preço</span>
+      <h2 class="h2">Seu link vale desconto <em>para todo mundo.</em></h2>
+      <p class="lead">Na Cerise, compartilhar não é favor: é estratégia. Cada amiga, colega ou parente que entra pelo seu link aproxima o grupo da próxima faixa, e quem já estava dentro paga menos também.</p>
+      <div class="share-points">
+        <div class="sp"><b>+1</b><span>convite aceito é um passo a menos até a próxima faixa</span></div>
+        <div class="sp"><b>1 preço</b><span>no fechamento, igual para todos do grupo</span></div>
+        <div class="sp"><b>2 toques</b><span>para enviar pelo WhatsApp com a oferta pronta</span></div>
+      </div>
+      <div class="share-btns">
+        <a class="btn btn-wa" id="waIdea" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1-.2-.1-1-.4-2-1.2-.7-.7-1.2-1.4-1.4-1.7-.1-.2 0-.4.1-.5l.4-.4.2-.4v-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.7.3-.2.2-.9.9-.9 2.2s.9 2.6 1.1 2.7c.1.2 1.8 2.8 4.4 3.9 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.2-.3-.2-.5-.3Z"/></svg>Enviar no WhatsApp</a>
+        <button class="btn btn-light" onclick="copyLink()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copiar link</button>
+        <a class="btn btn-light" id="tgIdea" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 3-20 8 7 3 3 7 10-18Z"/><path d="m9 14 4-4"/></svg>Telegram</a>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="wa-head"><span class="av">AM</span><div><strong>Amigas da academia</strong><span>Ana, Bia, Carol, você</span></div></div>
+          <div class="wa-body" id="chat">
+            <div class="msg me show"><div class="lp"><img src="assets/p-jogger.jpg" alt=""><div><strong>Calça Jogger Alfaiataria</strong><span>Rodada Cerise · R$ 154,90 agora, cai para R$ 141,90 com +3 pessoas</span></div></div>Gente, entra comigo nessa rodada? Se fecharmos mais 3 a calça fica R$ 141,90 pra todas 👀<time>10:41</time></div>
+            <div class="msg"><b style="color:#B5338A">Ana</b><br>Entrei! Peguei a M 🙌<time>10:43</time></div>
+            <div class="msg"><b style="color:#2F7DC1">Bia</b><br>Eu também, mandei pra minha irmã<time>10:44</time></div>
+            <div class="msg"><b style="color:#C46A16">Carol</b><br>Pronto, tô dentro. Falta 0? kkk<time>10:46</time></div>
+            <div class="msg-sys">Nova faixa desbloqueada: R$ 141,90 para todo o grupo</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GARANTIAS + FAQ ================= -->
+<section class="section" id="duvidas">
+  <div class="wrap">
+    <div class="trust reveal">
+      <div class="tcard"><div class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/></svg></div><h3>Nada cobrado antes</h3><p>Você só paga depois que a rodada fecha e o valor final é calculado.</p></div>
+      <div class="tcard"><div class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></div><h3>Menor preço garantido</h3><p>Quem entrou no começo paga o mesmo que quem entrou no último minuto.</p></div>
+      <div class="tcard"><div class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h3>Regras claras</h3><p>Preço atual, próxima faixa e tempo restante sempre visíveis na rodada.</p></div>
+      <div class="tcard"><div class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><h3>Tudo pelo WhatsApp</h3><p>Confirmação, valor final e link de pagamento chegam direto no seu celular.</p></div>
+    </div>
+    <div class="faq-grid">
+      <div class="reveal">
+        <span class="kicker">Dúvidas frequentes</span>
+        <h2 class="h2">Sem letra <em>miúda.</em></h2>
+        <p class="lead">Ainda ficou alguma pergunta? Fale com a gente pelo WhatsApp e respondemos rapidinho.</p>
+      </div>
+      <div class="faq reveal">
+        <details open><summary>Preciso pagar para entrar na rodada?<i>+</i></summary><p>Não. Para entrar você informa só nome, WhatsApp e tamanho ou modelo. O pagamento acontece depois que a rodada de 72 horas fecha, já com o menor preço que o grupo atingiu.</p></details>
+        <details><summary>E se o grupo não crescer?<i>+</i></summary><p>A rodada fecha no preço da faixa alcançada. Se ninguém além de você entrar, vale o preço inicial, que já é o preço de vitrine da peça. Você confirma (ou não) a compra quando receber o valor final.</p></details>
+        <details><summary>Como recebo o valor final e pago?<i>+</i></summary><p>Assim que a rodada fecha, enviamos no seu WhatsApp o valor final e o link de pagamento. Depois da confirmação, o pedido segue para separação e envio.</p></details>
+        <details><summary>Posso entrar em mais de uma rodada?<i>+</i></summary><p>Pode. Cada produto tem sua rodada, seu relógio e sua escada de preços. Você acompanha todas pelo ícone de sacola no topo do site.</p></details>
+        <details><summary>Quem convida ganha algo a mais?<i>+</i></summary><p>Ganha o que todo mundo ganha: um preço menor. Cada pessoa que entra pelo seu link aproxima o grupo da próxima faixa de desconto.</p></details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LISTA VIP ================= -->
+<section class="vip" id="lista-vip">
+  <div class="wrap">
+    <div class="vip-card reveal">
+      <div class="vip-media">
+        <img src="assets/n-rack.jpg" alt="Arara com roupas em tons neutros">
+        <div class="push push-1" id="push1"><span class="pi"><svg viewBox="0 0 32 32"><circle cx="11" cy="19" r="6" fill="#fff"/><circle cx="21" cy="18" r="6" fill="#FBD0DA"/></svg></span><div><strong>Cerise <small>agora</small></strong><p>Nova rodada aberta: Vestido Midi Linho. Os primeiros 10 já garantem 10% off.</p></div></div>
+        <div class="push push-2" id="push2"><span class="pi"><svg viewBox="0 0 32 32"><circle cx="11" cy="19" r="6" fill="#fff"/><circle cx="21" cy="18" r="6" fill="#FBD0DA"/></svg></span><div><strong>Cerise <small>2 min</small></strong><p>Faltam 3 pessoas para a Bolsa Transversal Rosé cair para R$ 179,90. Fecha em 4h.</p></div></div>
+      </div>
+      <div class="vip-body">
+        <span class="kicker">Lista VIP Cerise</span>
+        <h2 class="h2">Saiba das rodadas <em>antes de todo mundo.</em></h2>
+        <p class="lead">Quem entra primeiro no grupo puxa o preço para baixo mais cedo. Receba no WhatsApp cada nova rodada assim que ela abrir, só das categorias que você escolher.</p>
+        <div class="vip-proof"><div class="avatars" id="vipAv"></div><span><b>1.240 pessoas</b> já recebem os avisos</span></div>
+        <form class="form" id="vipForm" novalidate>
+          <div class="form-row">
+            <div class="field"><label for="vName">Seu nome</label><input id="vName" placeholder="Como podemos te chamar?" autocomplete="given-name"></div>
+            <div class="field"><label for="vWa">WhatsApp</label><input id="vWa" placeholder="(47) 90000-0000" inputmode="tel" autocomplete="tel"></div>
+          </div>
+          <div><span class="ints-l">O que você quer receber?</span>
+            <div class="ints" id="ints">
+              <button type="button" class="int on">Feminino</button><button type="button" class="int">Masculino</button><button type="button" class="int">Calçados</button><button type="button" class="int">Acessórios</button><button type="button" class="int">Jeans &amp; básicos</button><button type="button" class="int">Eletrônicos</button><button type="button" class="int">Ferramentas</button><button type="button" class="int">Casa &amp; decor</button><button type="button" class="int">Automotivo</button>
+            </div>
+          </div>
+          <label class="consent"><input type="checkbox" id="vOk" checked> Aceito receber avisos de rodadas pelo WhatsApp. Sem spam: no máximo 3 mensagens por semana e você sai quando quiser.</label>
+          <button class="btn btn-primary" type="submit">Quero entrar na lista VIP</button>
+        </form>
+        <div class="ok" id="vipOk"><h3>Pronto, você está na lista!</h3><p>Vamos te avisar no WhatsApp assim que abrir uma rodada das categorias que você escolheu.</p></div>
+        <div class="vip-perks">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5 9-10"/></svg>Aviso na abertura</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5 9-10"/></svg>Alerta de faixa quase batida</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5 9-10"/></svg>Só o que você escolher</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 </main>
 
-<footer class="footer">
+<!-- ================= FOOTER ================= -->
+<footer>
   <div class="wrap">
-    <div class="footgrid">
-      <div class="footbrand">
-        <div class="logo" style="color:#fff;font-size:46px">cerise<b>.</b></div>
-        <p>Compras coletivas com uma apresentação clara, editorial e inspirada em experiências visuais sofisticadas de e-commerce.</p>
-        <div class="social"><a href="#">f</a><a href="#">◎</a><a href="#">𝕏</a></div>
+    <div class="foot">
+      <div class="foot-brand">
+        <a class="logo" href="#top"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 4c1 4 3 7 7 9" stroke="#8DC28A" stroke-width="2" stroke-linecap="round"/><path d="M16 4c-1 5-4 8-7 10" stroke="#8DC28A" stroke-width="2" stroke-linecap="round"/><path d="M17 4c3-1 6 0 8 2-3 1-6 1-8-2Z" fill="#8DC28A"/><circle cx="9.5" cy="20.5" r="7" fill="#E0365C"/><circle cx="22.5" cy="19.5" r="7" fill="#C2183F"/></svg>cerise</a>
+        <p>Compras coletivas de moda, tech, casa e mais. Quanto mais gente entra, menor o preço para todos.</p>
+        <div class="socials">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></svg></a>
+          <a href="#" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3.5 20.5 5 16a8.5 8.5 0 1 1 3 3l-4.5 1.5Z"/></svg></a>
+          <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c.5 3 2.5 5 6 5"/></svg></a>
+        </div>
       </div>
-      <div class="footcol">
-        <h5>Menu</h5>
-        <a href="#como-funciona">About Us</a>
-        <a href="#rodadas">Products</a>
-        <a href="#passos">Journal</a>
-        <a href="#newsletter">Contact Us</a>
-      </div>
-      <div class="footcol">
-        <h5>Store</h5>
-        <a href="#rodadas">Moda</a>
-        <a href="#rodadas">Eletrônicos</a>
-        <a href="#rodadas">Ferramentas</a>
-        <a href="#rodadas">Casa</a>
-      </div>
-      <div class="footcol">
-        <h5>Featured</h5>
-        <div class="featured-item"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=100&q=80&fit=crop" alt="Fone Bluetooth"><div><strong>Fone Bluetooth</strong><span>R$ 199,00</span></div></div>
-        <div class="featured-item"><img src="https://images.unsplash.com/photo-1517256673644-36ad11246d21?w=100&q=80&fit=crop" alt="Cafeteira"><div><strong>Cafeteira</strong><span>R$ 329,00</span></div></div>
-        <div class="featured-item"><img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?w=100&q=80&fit=crop" alt="Parafusadeira"><div><strong>Parafusadeira</strong><span>R$ 349,00</span></div></div>
-      </div>
-      <div class="footcol">
-        <h5>Newsletter</h5>
-        <form class="footform"><input placeholder="name" aria-label="name"><input placeholder="email" aria-label="email"><button type="button">Submit</button></form>
-        <div class="footchecks"><span>Exclusive Product Releases</span><span>Only Subscribers Offers</span></div>
-      </div>
+      <div class="fcol"><h4>Cerise</h4><a href="#como-funciona">Como funciona</a><a href="#rodadas">Rodadas abertas</a><a href="#categorias">Categorias</a><a href="#lista-vip">Lista VIP</a></div>
+      <div class="fcol"><h4>Ajuda</h4><a href="#duvidas">Dúvidas frequentes</a><a href="#duvidas">Trocas e devoluções</a><a href="#duvidas">Termos de uso</a><a href="#duvidas">Privacidade</a></div>
+      <div class="fcol"><h4>Contato</h4><a href="#lista-vip">WhatsApp</a><a href="#lista-vip">contato@cerise.com.br</a><a href="#lista-vip">Seg a sex, 9h às 18h</a></div>
     </div>
-    <div class="footbottom"><span>CERISE • Vitrine pública ilustrativa</span><span>Esta página demonstra a experiência visual do usuário final. Nenhum pedido real é processado.</span></div>
+    <div class="foot-bottom"><div class="foot-legal"><span>© 2026 Cerise. Todos os direitos reservados.</span><span>Protótipo de demonstração · produtos, preços e participantes fictícios.</span></div><a class="credit" href="https://linktr.ee/maisideiasmkt" target="_blank" rel="noopener" aria-label="Desenvolvido por Mais Ideias MKT Estratégico 360°">Desenvolvido por <img src="data:image/webp;base64,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" alt="Mais Ideias MKT Estratégico 360°"></a></div>
   </div>
 </footer>
 
-<div id="modal" class="modal" role="dialog" aria-modal="true" aria-label="Detalhes da rodada">
-  <div class="modalbox"><button class="close" id="close" aria-label="Fechar">×</button><div id="modalbody"></div></div>
+<!-- ================= MODAL RODADA ================= -->
+<div class="modal" id="modal" aria-hidden="true" role="dialog" aria-modal="true">
+  <div class="panel" id="panel"></div>
 </div>
 
+<div class="toast-live" id="tl"></div>
+<div class="toast" id="toast"></div>
+
 <script>
-const products=[
-['Fone Bluetooth sem fio','Eletrônicos',299,199,26,40,'photo-1505740420928-5e560c06d30e'],
-['Relógio casual minimalista','Moda',389,269,19,30,'photo-1523275335684-37898b6baf30'],
-['Parafusadeira portátil','Ferramentas',499,349,16,25,'photo-1504148455328-c376907d081c'],
-['Cafeteira para sua cozinha','Casa',459,329,21,35,'photo-1517256673644-36ad11246d21'],
-['Tênis casual unissex','Moda',349,239,17,30,'photo-1542291026-7eec264c27ff'],
-['Headphone premium','Eletrônicos',599,419,31,50,'photo-1546435770-a3e426bf472b'],
-['Kit de ferramentas','Ferramentas',329,229,12,20,'photo-1581147036324-c1cdb4a25a9d'],
-['Mochila urbana','Moda',289,199,23,40,'photo-1553062407-98eeb64c6a62'],
-['Smartwatch esportivo','Eletrônicos',649,449,18,30,'photo-1523275335684-37898b6baf30'],
-['Luminária de mesa','Casa',239,169,14,25,'photo-1507473885765-e6ed057f782c'],
-['Furadeira elétrica','Ferramentas',579,399,22,35,'photo-1504148455328-c376907d081c'],
-['Câmera instantânea','Eletrônicos',769,549,24,40,'photo-1526170375885-4d8ecf77b99f']
+/* ---------- Dados ---------- */
+const H = 3600e3, R72 = 72*H;
+const TIERS = [1,10,20,30,50];
+const PCT = [1,.9,.82,.75,.68];
+const products = [
+  {id:1, name:'Calça Jogger Alfaiataria Rosé', cat:'Feminino', img:'p-jogger', base:189, buyers:27, ago:52, sizes:['PP','P','M','G','GG']},
+  {id:2, name:'Jaqueta Bomber Caramelo', cat:'Masculino', img:'p-bomber', base:289, buyers:18, ago:31, sizes:['P','M','G','GG']},
+  {id:3, name:'Jaqueta Biker em Couro Sintético', cat:'Feminino', img:'p-biker', base:349, buyers:44, ago:64, sizes:['PP','P','M','G']},
+  {id:4, name:'Camisa Jeans Poá Manga Longa', cat:'Masculino', img:'p-camisa', base:169, buyers:9, ago:12, sizes:['P','M','G','GG']},
+  {id:5, name:'Camiseta Linho Azul Céu', cat:'Feminino', img:'p-tee-azul', base:119, buyers:17, ago:68, sizes:['PP','P','M','G']},
+  {id:6, name:'Tênis Chunky Color Block', cat:'Calçados', img:'p-tenis', base:299, buyers:33, ago:40, sizes:['34','35','36','37','38','39','40']},
+  {id:7, name:'Óculos Redondo Dourado', cat:'Acessórios', img:'p-oculos', base:129, buyers:52, ago:58, sizes:['Único']},
+  {id:8, name:'Calça Jeans Reta Escura', cat:'Jeans', img:'p-jeans', base:199, buyers:21, ago:22, sizes:['36','38','40','42','44','46']},
+  {id:9, name:'Poncho de Tricô Off-White', cat:'Feminino', img:'p-poncho', base:179, buyers:6, ago:6, sizes:['Único']},
+  {id:10, name:'Camiseta Básica Algodão Pima', cat:'Jeans', img:'p-camiseta', base:89, buyers:38, ago:47, sizes:['P','M','G','GG','XG']},
+  {id:11, name:'Bolsa Transversal Rosé', cat:'Acessórios', img:'p-transversal', base:219, buyers:12, ago:18, sizes:['Único']},
+  {id:12, name:'Scarpin Floral Salto Fino', cat:'Calçados', img:'p-scarpin', base:239, buyers:19, ago:61, sizes:['34','35','36','37','38','39']},
+  {id:13, name:'Smartwatch Fitness Tela AMOLED', cat:'Eletrônicos', img:'p-smartwatch', base:399, buyers:41, ago:44, optLabel:'Cor', sizes:['Branco','Preto','Grafite']},
+  {id:14, name:'Jogo de Soquetes com Catraca 40 Peças', cat:'Ferramentas', img:'p-soquetes', base:229, buyers:24, ago:35, optLabel:'Modelo', sizes:['40 peças']},
+  {id:15, name:'Luminária de Piso Articulada', cat:'Casa & Decor', img:'p-luminaria', base:279, buyers:8, ago:9, optLabel:'Cor', sizes:['Grafite','Branca','Preta']},
+  {id:16, name:'Suporte Veicular Magnético para Celular', cat:'Automotivo', img:'p-suporte', base:79, buyers:47, ago:56, optLabel:'Modelo', sizes:['Painel','Saída de ar']}
 ];
-const money=n=>n.toLocaleString('pt-BR',{style:'currency',currency:'BRL',minimumFractionDigits:2,maximumFractionDigits:2});
-const img=id=>`https://images.unsplash.com/${id}?w=640&q=80&fit=crop`;
-const esc=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function render(category='Todos'){
-  const items=products.map((p,i)=>({p,i})).filter(x=>category==='Todos'||x.p[1]===category);
-  document.getElementById('cards').innerHTML=items.map(({p,i})=>`<article class="product" tabindex="0" role="button" aria-label="Ver rodada ${esc(p[0])}" data-id="${i}"><div class="photo"><img loading="lazy" src="${img(p[6])}" alt="Imagem ilustrativa de ${esc(p[0])}"><span class="pill">PREÇO COLETIVO</span></div><div class="info"><span class="category">${p[1]}</span><h3>${p[0]}</h3><div class="prices"><b>${money(p[3])}</b><del>${money(p[2])}</del></div><div class="progress"><span style="width:${Math.min(100,100*p[4]/p[5])}%"></span></div><div class="meta"><span>${p[4]} unidades reservadas</span><span>Meta ${p[5]}</span></div><div class="details">CONHECER RODADA ↗</div></div></article>`).join('');
-  document.querySelectorAll('.product').forEach(el=>{el.onclick=()=>openProduct(+el.dataset.id);el.onkeydown=e=>{if(e.key==='Enter')openProduct(+el.dataset.id)}})
+const IMG = {};
+const img = n => IMG[n] || ('assets/'+n+'.jpg');
+let seed = Date.now();
+try{ const s = Number(localStorage.getItem('cerise_seed_v2')); if(s && s < Date.now()+6e4) seed = s; else localStorage.setItem('cerise_seed_v2', String(seed)); }catch(e){}
+products.forEach(p=>{ p.start = seed - p.ago*H; p.prices = PCT.map(x=>Math.round(p.base*x)-0.1); p.prices[0]=p.base; });
+const myRounds = new Set();
+
+/* ---------- Utilidades ---------- */
+const brl = n => n.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+const brl0 = n => 'R$ '+Math.round(n).toLocaleString('pt-BR');
+function left(p){ const el=(Date.now()-p.start)%R72; return R72-el; }
+function clock(ms){ const t=Math.floor(ms/1e3); return [Math.floor(t/3600),Math.floor(t%3600/60),t%60].map(v=>String(v).padStart(2,'0')).join(':'); }
+function tierIdx(n){ let i=0; TIERS.forEach((t,k)=>{ if(n>=t) i=k; }); return i; }
+function nextOf(p){ const i=tierIdx(p.buyers); return TIERS[i+1] ? {need:TIERS[i+1]-p.buyers, price:p.prices[i+1], at:TIERS[i+1]} : null; }
+function catName(c){ return c==='Jeans'?'Jeans & básicos':c; }
+function off(p){ return Math.round((1-PCT[tierIdx(p.buyers)])*100); }
+const MAXB = TIERS[TIERS.length-1];
+const tickMarks = TIERS.slice(1,-1).map(t=>`<em style="left:${t/MAXB*100}%"></em>`).join('');
+const COLORS=['#C2183F','#2F7DC1','#B5338A','#1E8A5A','#C46A16','#5B4BC4'];
+const NAMES=['Ana','Bia','Carol','Duda','Lu','Rafa','Gabi','Nanda','Léo','Mari','Júlia','Paula','Thiago','Bruno','Lara','Isa'];
+const CITIES=['Joinville','Itapema','Balneário Camboriú','Blumenau','Florianópolis','Itajaí','Jaraguá do Sul','Curitiba'];
+function avatars(n){ return Array.from({length:n},(_,i)=>`<span style="background:${COLORS[i%COLORS.length]}">${NAMES[(i*3)%NAMES.length][0]}</span>`).join(''); }
+const ico = {
+  clock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+  wa:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1-.2-.1-1-.4-2-1.2-.7-.7-1.2-1.4-1.4-1.7-.1-.2 0-.4.1-.5l.4-.4.2-.4v-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.7.3-.2.2-.9.9-.9 2.2s.9 2.6 1.1 2.7c.1.2 1.8 2.8 4.4 3.9 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.2-.3-.2-.5-.3Z"/></svg>',
+  check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5 9-10"/></svg>',
+  lock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>',
+  shield:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg>'
+};
+function shareText(p){ const n=nextOf(p); return p ? `Entra comigo nessa rodada da Cerise: ${p.name}, hoje por ${brl(p.prices[tierIdx(p.buyers)])}.${n?` Se entrarem mais ${n.need}, cai para ${brl(n.price)} pra todo mundo.`:''}` : ''; }
+function pageUrl(){ try{ return (location.href.split('#')[0]) || 'https://cerise.com.br'; }catch(e){ return 'https://cerise.com.br'; } }
+function waLink(text){ return 'https://wa.me/?text='+encodeURIComponent(text+' '+pageUrl()); }
+
+/* ---------- Cards ---------- */
+let sortMode='end', showAll=false; const FIRST=8;
+function card(p){
+  const i=tierIdx(p.buyers), n=nextOf(p), ms=left(p), urgent=ms<6*H;
+  const pct=Math.min(100,p.buyers/MAXB*100);
+  return `<article class="card reveal in" data-id="${p.id}">
+    <div class="card-media" onclick="openRound(${p.id})">
+      <img src="${img(p.img)}" alt="${p.name}">
+      <a class="share-fab" href="${waLink(shareText(p))}" target="_blank" rel="noopener" onclick="event.stopPropagation()" aria-label="Compartilhar no WhatsApp">${ico.wa}</a>
+      <span class="chip chip-time ${urgent?'urgent':''}">${ico.clock}<span data-clock="${p.id}">${clock(ms)}</span></span>
+      ${i>0?`<span class="chip chip-off">-${off(p)}%</span>`:''}
+    </div>
+    <div class="card-body">
+      <div><div class="card-cat">${catName(p.cat)}</div><h3 class="card-name" onclick="openRound(${p.id})">${p.name}</h3></div>
+      <div class="card-price"><b>${brl(p.prices[i])}</b>${i>0?`<s>${brl(p.base)}</s>`:''}<small>preço atual do grupo</small></div>
+      <div class="prog">
+        <div class="prog-bar"><span style="width:${pct}%"></span>${tickMarks}</div>
+        <div class="prog-info"><span class="who"><b>${p.buyers}</b> no grupo</span></div>
+      </div>
+      <div class="next ${n?'':'max'}">${n?`${n.need>1?'Faltam':'Falta'} ${n.need} ${n.need>1?'pessoas':'pessoa'} para ${brl(n.price)}`:'Menor preço da rodada alcançado'}</div>
+      <div class="card-actions">
+        <button class="btn btn-primary" onclick="openRound(${p.id})">${myRounds.has(p.id)?'Você está no grupo':'Participar da rodada'}</button>
+        <a class="share-sq" href="${waLink(shareText(p))}" target="_blank" rel="noopener" aria-label="Compartilhar ${p.name} no WhatsApp">${ico.wa}</a>
+      </div>
+    </div>
+  </article>`;
 }
-render();
-document.querySelectorAll('.filter').forEach(el=>el.addEventListener('click',()=>{document.querySelectorAll('.filter').forEach(x=>x.classList.remove('active'));el.classList.add('active');render(el.dataset.filter)}));
-let qty=1;
-function openProduct(i){
-  const p=products[i]; qty=1; const tier2=Math.round((p[2]+p[3])/2);
-  document.getElementById('modalbody').innerHTML=`<div class="modalinner"><div class="modalimg"><img src="${img(p[6])}" alt="Produto ilustrativo"></div><div class="modalcontent"><span class="tag">PREÇO COLETIVO</span><h2>${p[0]}</h2><p class="moddesc">Acompanhe a evolução dos descontos conforme novas unidades são reservadas. Valores e prazos ilustrativos.</p><div style="display:flex;justify-content:space-between;font-size:12px;margin:18px 0;gap:12px;flex-wrap:wrap"><span>● Rodada em andamento</span><b>⏱ 47h 23min restantes*</b></div><div class="tier"><span>Faixa inicial<br><small>1 a 9 unidades</small></span><strong>${money(p[2])}</strong></div><div class="tier current"><span>Faixa atual<br><small>10 a ${p[5]-1} unidades</small></span><strong>${money(tier2)}</strong></div><div class="tier"><span>Próxima faixa<br><small>A partir de ${p[5]} unidades</small></span><strong>${money(p[3])}</strong></div><p class="moddesc">${p[4]} unidades reservadas • Faltam ${Math.max(0,p[5]-p[4])} para a próxima faixa.<br>*Contador demonstrativo, não conectado a um servidor.</p><div class="quantity"><strong style="font-size:12px;margin-right:auto">Quantidade desejada</strong><button id="minus">−</button><span id="qty">1</span><button id="plus">+</button></div><form id="demoform" class="form"><input aria-label="Nome" placeholder="Seu nome" required><input aria-label="Contato" placeholder="WhatsApp ou e-mail" required><button class="btn" type="submit">Participar desta rodada ↗</button><small>Esta página é uma demonstração visual. Nenhum dado é enviado ou armazenado.</small></form><div id="success" class="success">Esta é uma simulação da experiência de participação. Nenhuma reserva foi registrada.</div><button class="outline" id="share" style="margin-top:12px;width:100%">Compartilhar esta rodada</button></div></div>`;
-  document.getElementById('modal').classList.add('open'); document.body.style.overflow='hidden';
-  document.getElementById('minus').onclick=()=>{qty=Math.max(1,qty-1);document.getElementById('qty').textContent=qty};
-  document.getElementById('plus').onclick=()=>{qty=Math.min(30,qty+1);document.getElementById('qty').textContent=qty};
-  document.getElementById('demoform').onsubmit=e=>{e.preventDefault();document.getElementById('success').style.display='block';e.target.reset()};
-  document.getElementById('share').onclick=async()=>{try{await navigator.clipboard.writeText(location.href.split('#')[0]+'#rodadas');alert('Link da demonstração copiado.')}catch(e){alert('Link desta página: '+location.href)}}
+function sorted(){
+  const a=[...products];
+  if(sortMode==='end') a.sort((x,y)=>left(x)-left(y));
+  if(sortMode==='near') a.sort((x,y)=>(nextOf(x)?.need??999)-(nextOf(y)?.need??999));
+  if(sortMode==='hot') a.sort((x,y)=>y.buyers-x.buyers);
+  return a;
 }
-function closeModal(){document.getElementById('modal').classList.remove('open');document.body.style.overflow=''}
-document.getElementById('close').onclick=closeModal;
-document.getElementById('modal').onclick=e=>{if(e.target.id==='modal')closeModal()};
-document.onkeydown=e=>{if(e.key==='Escape')closeModal()};
+function renderGrid(){ const list=sorted(); document.getElementById('grid').innerHTML = (showAll?list:list.slice(0,FIRST)).map(card).join(''); document.getElementById('moreWrap').hidden = showAll || list.length<=FIRST; }
+document.getElementById('moreBtn').addEventListener('click',()=>{ showAll=true; renderGrid(); });
+document.querySelectorAll('.cat').forEach(a=>a.addEventListener('click',()=>{ showAll=true; renderGrid(); }));
+document.querySelectorAll('.sort').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.sort').forEach(x=>x.classList.toggle('on',x===b)); sortMode=b.dataset.sort; renderGrid();
+}));
+document.querySelectorAll('[data-count]').forEach(el=>{ const c=products.filter(p=>p.cat===el.dataset.count).length; el.textContent = c+(c>1?' rodadas abertas':' rodada aberta'); });
+
+/* ---------- Modal rodada ---------- */
+let current=null;
+function openRound(id){
+  const p=products.find(x=>x.id===id); current=p;
+  const i=tierIdx(p.buyers), n=nextOf(p), joined=myRounds.has(id);
+  document.getElementById('panel').innerHTML = `
+    <button class="close" onclick="closeRound()" aria-label="Fechar">×</button>
+    <div class="panel-media"><img src="${img(p.img)}" alt="${p.name}"></div>
+    <div class="panel-body">
+      <div class="pb-top"><span class="tag">${catName(p.cat)}</span><span class="tag tag-time">Fecha em <span id="mClock">${clock(left(p))}</span></span></div>
+      <h3>${p.name}</h3>
+      <div class="pb-price"><b>${brl(p.prices[i])}</b>${i>0?`<s>${brl(p.base)}</s><small>-${off(p)}% já desbloqueado</small>`:''}</div>
+      <p class="pb-sub"><b style="color:var(--ink)">${p.buyers} pessoas</b> no grupo · ${n?`${n.need>1?'faltam':'falta'} <b style="color:var(--green)">${n.need}</b> para ${brl(n.price)}`:'menor preço alcançado'}</p>
+      <div class="pb-label">Faixas de preço desta rodada</div>
+      <div class="ladder">${TIERS.map((t,k)=>`<div class="tier ${k<=i?'on':''} ${k===i?'cur':''}"><span class="ic">${k<=i?ico.check:ico.lock}</span><span class="lbl">${t===1?'Preço inicial':'A partir de '+t+' pessoas'}<small>${k===i?'faixa atual':(k<i?'desbloqueada':(k===TIERS.length-1?'menor preço possível':'faltam '+(t-p.buyers)))}</small></span><span class="val">${brl(p.prices[k])}</span></div>`).join('')}</div>
+      <div id="joinWrap" ${joined?'hidden':''}>
+        <div class="pb-label">${p.optLabel||'Tamanho'}</div>
+        <div class="sizes" id="sizes">${p.sizes.map((s,k)=>`<button type="button" class="size ${p.sizes.length===1||k===Math.floor(p.sizes.length/2)?'on':''}">${s}</button>`).join('')}</div>
+        <form class="join" id="joinForm" novalidate>
+          <div class="form-row">
+            <div class="field"><label for="jName">Nome</label><input id="jName" placeholder="Seu nome" autocomplete="given-name"></div>
+            <div class="field"><label for="jWa">WhatsApp</label><input id="jWa" placeholder="(47) 90000-0000" inputmode="tel" autocomplete="tel"></div>
+          </div>
+          <button class="btn btn-primary" type="submit">Participar da rodada</button>
+          <p class="join-note">${ico.shield}<span>Nada é cobrado agora. Quando a rodada fechar, você recebe o valor final e o link de pagamento no WhatsApp.</span></p>
+        </form>
+      </div>
+      <div class="joined ${joined?'show':''}" id="joined">
+        <h4>Você está no grupo!</h4>
+        <p>Agora é com você: quanto mais gente entrar, menor fica o preço. Mande para quem também ia gostar desse produto.</p>
+        <div class="share-btns">
+          <a class="btn btn-wa" href="${waLink(shareText(p))}" target="_blank" rel="noopener">${ico.wa}Chamar no WhatsApp</a>
+          <button class="btn btn-ghost" onclick="copyLink(current)">Copiar link</button>
+        </div>
+      </div>
+    </div>`;
+  document.querySelectorAll('#sizes .size').forEach(b=>b.addEventListener('click',()=>document.querySelectorAll('#sizes .size').forEach(x=>x.classList.toggle('on',x===b))));
+  const f=document.getElementById('joinForm');
+  if(f) f.addEventListener('submit',e=>{ e.preventDefault();
+    const nm=document.getElementById('jName'), wa=document.getElementById('jWa');
+    const okN=nm.value.trim().length>1, okW=wa.value.replace(/\D/g,'').length>=10;
+    nm.classList.toggle('err',!okN); wa.classList.toggle('err',!okW);
+    if(!okN||!okW){ toast('Preencha nome e WhatsApp com DDD.'); return; }
+    p.buyers++; myRounds.add(p.id); updateMy(); renderGrid(); openRound(p.id); toast('Você entrou na rodada!');
+  });
+  const m=document.getElementById('modal'); m.classList.add('open'); m.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden';
+  document.getElementById('panel').scrollTop=0;
+}
+function closeRound(){ const m=document.getElementById('modal'); m.classList.remove('open'); m.setAttribute('aria-hidden','true'); document.body.style.overflow=''; current=null; }
+document.getElementById('modal').addEventListener('click',e=>{ if(e.target.id==='modal') closeRound(); });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeRound(); });
+function updateMy(){ const c=document.getElementById('myCount'); c.hidden=!myRounds.size; c.textContent=myRounds.size; }
+
+/* ---------- Compartilhar ---------- */
+const ideaText='Conheci a Cerise: compras coletivas em que o preço cai conforme mais gente entra no grupo. Bora entrar junto?';
+document.getElementById('waIdea').href = waLink(ideaText);
+document.getElementById('tgIdea').href = 'https://t.me/share/url?url='+encodeURIComponent(pageUrl())+'&text='+encodeURIComponent(ideaText);
+function copyLink(p){
+  const txt=(p?shareText(p):ideaText)+' '+pageUrl();
+  try{ navigator.clipboard.writeText(txt).then(()=>toast('Link copiado. É só colar e enviar.')).catch(()=>toast('Não deu para copiar automaticamente.')); }catch(e){ toast('Não deu para copiar automaticamente.'); }
+}
+let tT; function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(tT); tT=setTimeout(()=>t.classList.remove('show'),2600); }
+
+/* ---------- Hero ao vivo ---------- */
+const hp = products.find(p=>p.id===2);
+const live = {n:14};
+document.getElementById('liveBar').insertAdjacentHTML('beforeend', [10,20,30].map(t=>`<em style="left:${t/40*100}%"></em>`).join(''));
+function renderLive(prevIdx){
+  const n=live.n, i=tierIdx(n), price=hp.prices[i];
+  const lp=document.getElementById('livePrice'); lp.textContent=brl(price);
+  document.getElementById('liveFill').style.width=Math.min(100,n/40*100)+'%';
+  document.getElementById('liveBuyers').textContent=n;
+  const nx=TIERS[i+1]; document.getElementById('liveNext').textContent = nx&&nx<=40 ? `${nx-n>1?'faltam':'falta'} ${nx-n} para ${brl(hp.prices[i+1])}` : 'menor faixa alcançada';
+  document.getElementById('liveAv').innerHTML=avatars(Math.min(5,Math.ceil(n/6)));
+  if(prevIdx!==undefined && i>prevIdx){ lp.classList.add('drop'); document.getElementById('liveUnlock').textContent=`Nova faixa desbloqueada: -${Math.round((1-PCT[i])*100)}% para todos`; setTimeout(()=>lp.classList.remove('drop'),1800); }
+}
+renderLive();
+setInterval(()=>{ const prev=tierIdx(live.n); live.n = live.n>=36 ? 14 : live.n+1; if(live.n===14) document.getElementById('liveUnlock').textContent=''; renderLive(live.n===14?undefined:prev); }, 1500);
+
+/* ---------- Simulador ---------- */
+const sr=document.getElementById('simRange');
+function renderSim(){
+  const n=+sr.value, i=tierIdx(n), price=hp.prices[i];
+  sr.style.setProperty('--p',((n-1)/59*100)+'%');
+  document.getElementById('simN').textContent=n;
+  document.getElementById('simPrice').textContent=brl0(price);
+  document.getElementById('simSave').textContent=brl0(hp.base-price);
+  document.getElementById('simLadder').innerHTML=TIERS.map((t,k)=>`<div class="tier ${k<=i?'on':''} ${k===i?'cur':''}"><span class="ic">${k<=i?ico.check:ico.lock}</span><span class="lbl">${t===1?'Preço inicial':t+' pessoas ou mais'}<small>${k===0?'preço de vitrine':'-'+Math.round((1-PCT[k])*100)+'% para todos'}</small></span><span class="val">${brl(hp.prices[k])}</span></div>`).join('');
+}
+renderSim();
+let simAuto=true, simDir=1;
+sr.addEventListener('input',()=>{ simAuto=false; renderSim(); });
+const simObs = new IntersectionObserver(es=>es.forEach(e=>{ simVisible=e.isIntersecting; }),{threshold:.3}); let simVisible=false; simObs.observe(document.getElementById('sim'));
+setInterval(()=>{ if(!simAuto||!simVisible) return; let v=+sr.value+simDir; if(v>=55){simDir=-1;} if(v<=1){simDir=1;} sr.value=v; renderSim(); }, 140);
+
+/* ---------- Chat animado ---------- */
+const chatEls=[...document.querySelectorAll('#chat .msg, #chat .msg-sys')];
+let chatPlayed=false;
+new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting&&!chatPlayed){ chatPlayed=true; playChat(); } }),{threshold:.35}).observe(document.getElementById('chat'));
+function playChat(){ chatEls.slice(1).forEach(el=>el.classList.remove('show')); chatEls.forEach((el,k)=>setTimeout(()=>el.classList.add('show'),400+k*1100)); setTimeout(playChat, 400+chatEls.length*1100+5000); }
+
+/* ---------- Lista VIP ---------- */
+document.getElementById('vipAv').innerHTML=avatars(5);
+document.querySelectorAll('#ints .int').forEach(b=>b.addEventListener('click',()=>b.classList.toggle('on')));
+document.getElementById('vipForm').addEventListener('submit',e=>{ e.preventDefault();
+  const nm=document.getElementById('vName'), wa=document.getElementById('vWa');
+  const okN=nm.value.trim().length>1, okW=wa.value.replace(/\D/g,'').length>=10;
+  nm.classList.toggle('err',!okN); wa.classList.toggle('err',!okW);
+  if(!okN||!okW){ toast('Preencha nome e WhatsApp com DDD.'); return; }
+  if(!document.getElementById('vOk').checked){ toast('Marque o aceite para receber os avisos.'); return; }
+  e.target.hidden=true; document.getElementById('vipOk').classList.add('show');
+});
+function maskTel(el){ el.addEventListener('input',()=>{ let d=el.value.replace(/\D/g,'').slice(0,11); el.value = d.length>6?`(${d.slice(0,2)}) ${d.slice(2,7)}-${d.slice(7)}`:d.length>2?`(${d.slice(0,2)}) ${d.slice(2)}`:d; }); }
+maskTel(document.getElementById('vWa'));
+document.addEventListener('focusin',e=>{ if(e.target.id==='jWa'&&!e.target.dataset.m){ e.target.dataset.m=1; maskTel(e.target); } });
+new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ setTimeout(()=>document.getElementById('push1').classList.add('show'),300); setTimeout(()=>document.getElementById('push2').classList.add('show'),1300); } }),{threshold:.3}).observe(document.querySelector('.vip-media'));
+
+/* ---------- Atividade ao vivo ---------- */
+const tl=document.getElementById('tl');
+function liveActivity(){
+  if(document.getElementById('modal').classList.contains('open') || innerWidth<=640) return;
+  const p=products[Math.floor(Math.random()*products.length)];
+  const nm=NAMES[Math.floor(Math.random()*NAMES.length)], ct=CITIES[Math.floor(Math.random()*CITIES.length)];
+  tl.innerHTML=`<img src="${img(p.img)}" alt=""><p><b>${nm}</b>, de ${ct}, entrou na rodada <b>${p.name}</b><small>há poucos segundos</small></p>`;
+  tl.classList.add('show'); setTimeout(()=>tl.classList.remove('show'),4200);
+}
+setTimeout(()=>{ liveActivity(); setInterval(liveActivity,13000); }, 6000);
+
+/* ---------- Relógios ---------- */
+function tick(){
+  document.querySelectorAll('[data-clock]').forEach(el=>{ el.textContent=clock(left(products.find(p=>p.id==el.dataset.clock))); });
+  document.getElementById('liveClock').textContent=clock(left(hp));
+  const mc=document.getElementById('mClock'); if(mc&&current) mc.textContent=clock(left(current));
+}
+setInterval(tick,1000);
+
+/* ---------- Anúncio, header, menu, reveal ---------- */
+const ann=['Rodadas de 72 horas','Quanto mais gente entra, menor o preço','Nada é cobrado antes do grupo fechar','Todo mundo paga o mesmo valor final','Entre no grupo com nome e WhatsApp'];
+document.getElementById('announce').innerHTML=[...ann,...ann,...ann,...ann].map(t=>`<span><i></i>${t}</span>`).join('');
+addEventListener('scroll',()=>document.getElementById('hdr').classList.toggle('scrolled',scrollY>8),{passive:true});
+function menu(o){ const m=document.getElementById('mm'); m.classList.toggle('open',o); m.setAttribute('aria-hidden',!o); document.body.style.overflow=o?'hidden':''; }
+const ro=('IntersectionObserver' in window)?new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); } }),{threshold:0,rootMargin:'0px 0px -8% 0px'}):null;
+if('IntersectionObserver' in window){ document.querySelectorAll('.reveal').forEach(el=>ro.observe(el)); }
+setTimeout(()=>document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in')), 2500);
+renderGrid(); tick();
 </script>
-</body></html>
+</body>
+</html>

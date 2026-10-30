@@ -1,11 +1,23 @@
-# Cerise — prévia pública estilo Mueble (v2)
+# Cerise — Home Fase 1 (MVP)
 
-Abra `index.html` no navegador para visualizar a demonstração.
+Protótipo navegável da home da Cerise, plataforma de compras coletivas: quanto mais gente entra no grupo, menor o preço para todos.
 
-## Publicar no GitHub Pages
-1. Suba o conteúdo desta pasta para um repositório.
-2. Em **Settings > Pages**, selecione a branch principal e a pasta `/root`.
-3. Aguarde a publicação do link público.
+## O que tem nesta versão
+- Hero com rodada ao vivo animada
+- "O que é a Cerise" com simulador de faixas de preço
+- 16 rodadas com contador de 72h, faixas de desconto e entrada com cadastro simplificado
+- 9 categorias: Feminino, Masculino, Calçados, Acessórios, Jeans & básicos, Eletrônicos, Ferramentas, Casa & decor e Automotivo
+- Compartilhamento por WhatsApp, Telegram e link
+- Lista VIP por WhatsApp
+- Layout responsivo (desktop, tablet e celular)
 
-## Observação
-Esta página é apenas uma demonstração visual da experiência do usuário final da Cerise.
+## Estrutura
+- `index.html` — página completa (HTML, CSS e JS)
+- `assets/` — fotos de produtos e categorias (Unsplash)
+
+## Publicação
+Publicado via GitHub Pages a partir da branch `main`, pasta raiz.
+
+> Demonstração com produtos, preços e participantes fictícios. Sem reservas ou pagamentos reais.
+
+Desenvolvido por [Mais Ideias MKT Estratégico 360°](https://linktr.ee/maisideiasmkt).
